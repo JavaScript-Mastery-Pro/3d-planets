@@ -16,31 +16,17 @@ const PlanetDetail = () => {
   return (
     <div className="w-screen h-full bg-planet-card-bg bg-cover px-20">
       {/* nav bar */}
-      <nav className="flex justify-between pt-10">
-        <div className="flex cursor-pointer ">
-          <img src={backImg} alt="back arrow" />
-          <p
-            className="sub-text ms-2 transition-all hover:text-primary"
-            onClick={handleBack}
-          >
-            Back
-          </p>
-        </div>
-        <div className="flex gap-10">
-          <p className="sub-text">Home</p>
-          <p className="sub-text">Planets</p>
-        </div>
-      </nav>
+      <Nav border={false} isBack={true} />
 
       {/* canvas for the planets */}
       <Canvas
         style={{
-          width: "80vw",
+          width: "70vw",
           height: "60vh",
           position: "relative",
           top: 0,
           left: "50%",
-          transform: "translate(-50%, -13%) ",
+          transform: "translate(-50%, -15%)",
         }}
       >
         <OrbitControls
@@ -131,7 +117,7 @@ const PlanetDetail = () => {
         </div>
 
         <div className="w-full h-full mt-24">
-          <Nav border={false} />
+          <Nav border={false} isBack={false} />
         </div>
       </div>
     </div>

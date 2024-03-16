@@ -44,7 +44,7 @@ body {
   width: calc(100% - 100px);
   aspect-ratio: 1;
   /* height: 500px; */
-  border: 5px solid black;
+  border: 1px solid white;
   position: relative;
   border-radius: 50%;
   transform: rotateX(70deg);
