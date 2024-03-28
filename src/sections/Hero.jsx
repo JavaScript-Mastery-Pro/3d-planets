@@ -1,4 +1,4 @@
-import { View } from "@react-three/drei";
+import { Environment, Lightformer, Sparkles, View } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import React from "react";
 
@@ -7,10 +7,12 @@ import ViewComponent from "../components/ViewComponent";
 import GroupComponent from "../components/GroupComponent";
 import Implement2D from "../components/Implement2D";
 import Nav from "../components/Nav";
+import { Bloom, EffectComposer } from "@react-three/postprocessing";
 
 const Hero = () => {
   return (
-    <div className="w-screen h-screen bg-planet-card-bg bg-cover px-20">
+    // bg-planet-card-bg bg-cover
+    <div className="w-screen bg-planet-card-bg bg-cover px-20">
       <Nav border={true} isBack={false} />
       <Canvas
         className="w-screen h-screen"
@@ -22,11 +24,13 @@ const Hero = () => {
           right: 0,
           overflow: "hidden",
         }}
+        shadows
         eventSource={document.getElementById("root")}
+        // flat={true}
       >
         <View.Port />
-        {/* <GroupComponent /> */}
       </Canvas>
+      {/* <GroupComponent /> */}
       {/* <ViewComponent /> */}
       <Implement2D />
     </div>

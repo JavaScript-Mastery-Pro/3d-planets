@@ -16,6 +16,7 @@
     "@react-three/fiber": "^8.15.14",
     "@react-three/postprocessing": "^2.15.12",
     "@studio-freight/lenis": "^1.0.37",
+    "@studio-freight/react-lenis": "^0.0.46",
     "@types/three": "^0.160.0",
     "framer-motion": "^10.18.0",
     "gsap": "^3.12.5",
