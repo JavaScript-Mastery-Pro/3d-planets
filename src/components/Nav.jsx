@@ -21,7 +21,7 @@ const Nav = ({ border, isBack }) => {
 
   return (
     <nav
-      className={`flex justify-between py-7 border-b-dim ${
+      className={`flex justify-between py-7 border-b-dim relative z-50 ${
         border ? "border-b" : "border-0"
       } z-10`}
     >

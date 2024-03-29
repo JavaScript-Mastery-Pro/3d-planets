@@ -4,6 +4,8 @@ import { backImg, earthVd } from "../utils";
 import { Canvas } from "@react-three/fiber";
 import { Environment, OrbitControls, View } from "@react-three/drei";
 import Nav from "../components/Nav";
+import EarthView from "../modelsComponent/EarthView";
+import { planetDetailsLists } from "../constants";
 
 const PlanetDetail = () => {
   const { id } = useParams();
@@ -13,46 +15,49 @@ const PlanetDetail = () => {
     back("/planets");
   };
 
+  const {
+    title,
+    des,
+    diameter,
+    gravity,
+    area,
+    vd,
+    model: Model,
+    color
+  } = planetDetailsLists.find((planet) => planet.id === Number(id));
+
   return (
-    <div className="w-screen h-full bg-planet-card-bg bg-cover px-20">
+    // bg-planet-card-bg bg-cover
+    <div
+      className="w-screen h-full  px-20"
+      style={{
+        backgroundColor: `${color}`,
+      }}
+    >
       {/* nav bar */}
       <Nav border={false} isBack={true} />
 
       {/* canvas for the planets */}
       <Canvas
         style={{
-          width: "70vw",
+          width: "100vw",
           height: "60vh",
           position: "relative",
           top: 0,
           left: "50%",
           transform: "translate(-50%, -15%)",
+          // border: "1px solid red",
         }}
       >
-        <OrbitControls
-          enableZoom={false}
-          rotateSpeed={0.2}
-          autoRotate
-          autoRotateSpeed={0.2}
-        />
-        <ambientLight intensity={0.5} />
-        <Environment preset="city" />
-        <mesh scale={[4, 4, 4]} position={[0, 1.5, 0]}>
-          <sphereGeometry />
-          <meshStandardMaterial color={"#D3E7FF"} wireframe />
-        </mesh>
+        <Model />
       </Canvas>
 
       {/* Earth Text */}
       <div className="flex flex-col items-center -translate-y-14">
-        <h1 className="font-sans text-8xl font-bold">Earth</h1>
+        <h1 className="font-sans text-8xl font-bold">{title}</h1>
         <div className="w-28 h-2 rounded-lg bg-skyBlue"></div>
 
-        <p className="detail-sub-text mt-10">
-          Earth, our home planet, has a diameter of about 12,742 kilometers. It
-          completes one orbit around the Sun in approximately 365.25 days and
-          rotates about its axis every 24 hours.
-        </p>
+        <p className="detail-sub-text mt-10">{des}</p>
 
         <div className="w-52 h-14 rounded-full bg-primary flexCenter mt-10">
           <p className="text-black font-semibold">SCROLL DOWN</p>
@@ -61,15 +66,15 @@ const PlanetDetail = () => {
         <div className="flex flex-col md:flex-row gap-16 my-20">
           <div className="w-52 h-full flexCenter flex-col gap-1">
             <p className="info-sub-text">Diameters</p>
-            <p className="font-sans text-3xl font-bold">12,742 km</p>
+            <p className="font-sans text-3xl font-bold">{diameter} km</p>
           </div>
           <div className="w-52 h-full flexCenter flex-col gap-1">
             <p className="info-sub-text">Gravity</p>
-            <p className="font-sans text-3xl font-bold">0.376 g</p>
+            <p className="font-sans text-3xl font-bold">{gravity} g</p>
           </div>
           <div className="w-52 h-full flexCenter flex-col gap-1">
             <p className="info-sub-text">Surface Area</p>
-            <p className="font-sans text-3xl font-bold">510.1M SM</p>
+            <p className="font-sans text-3xl font-bold">{area}M SM</p>
           </div>
         </div>
 
@@ -92,7 +97,7 @@ const PlanetDetail = () => {
         </p>
 
         <video
-          src={earthVd}
+          src={vd}
           autoPlay
           muted
           loop
