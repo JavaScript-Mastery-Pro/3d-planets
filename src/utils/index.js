@@ -31,6 +31,7 @@ import mImg from "../assets/imgs/textures/earth/m.jpg";
 import mnImg from "../assets/imgs/textures/earth/mn.jpg";
 import mdImg from "../assets/imgs/textures/earth/md.png";
 import maImg from "../assets/imgs/textures/earth/ma.jpg";
+import mcImg from "../assets/imgs/textures/earth/mc.png";
 
 import fImg from "../assets/imgs/textures/earth/f.jpg";
 import fnImg from "../assets/imgs/textures/earth/fn.jpg";
@@ -46,6 +47,22 @@ import cImg from "../assets/imgs/textures/earth/c.jpg";
 import cnImg from "../assets/imgs/textures/earth/cn.jpg";
 import cdImg from "../assets/imgs/textures/earth/cd.png";
 import caImg from "../assets/imgs/textures/earth/ca.jpg";
+
+import ndImg from "../assets/imgs/textures/Nebulon Delta/nd.jpg";
+import ndnImg from "../assets/imgs/textures/Nebulon Delta/ndn.jpg";
+import nddImg from "../assets/imgs/textures/Nebulon Delta/ndd.png";
+import ndaImg from "../assets/imgs/textures/Nebulon Delta/nda.jpg";
+import ndcImg from "../assets/imgs/textures/Nebulon Delta/ndc.png";
+
+import lImg from "../assets/imgs/textures/Verdantia/lm.jpg";
+import lnImg from "../assets/imgs/textures/Verdantia/ln.jpg";
+import ldImg from "../assets/imgs/textures/Verdantia/ld.png";
+import laImg from "../assets/imgs/textures/Verdantia/la.jpg";
+
+import sImg from "../assets/imgs/textures/Spectra/sm.jpg";
+import snImg from "../assets/imgs/textures/Spectra/sn.jpg";
+import sdImg from "../assets/imgs/textures/Spectra/sd.png";
+import saImg from "../assets/imgs/textures/Spectra/sa.jpg";
 
 import sunImg from "../assets/imgs/textures/earth/sun.jpeg";
 
@@ -85,6 +102,7 @@ export const mm = mImg;
 export const mn = mnImg;
 export const md = mdImg;
 export const ma = maImg;
+export const mc = mcImg;
 
 export const fm = fImg;
 export const fn = fnImg;
@@ -100,6 +118,22 @@ export const cm = cImg;
 export const cn = cnImg;
 export const cd = cdImg;
 export const ca = caImg;
+
+export const ndm = ndImg;
+export const ndn = ndnImg;
+export const ndd = nddImg;
+export const nda = ndaImg;
+export const ndc = ndcImg;
+
+export const lm = lImg;
+export const ln = lnImg;
+export const ld = ldImg;
+export const la = laImg;
+
+export const sm = sImg;
+export const sn = snImg;
+export const sd = sdImg;
+export const sa = saImg;
 
 export const sun = sunImg;
 

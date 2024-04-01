@@ -1,11 +1,8 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { backImg, earthVd } from "../utils";
 import { Canvas } from "@react-three/fiber";
-import { Environment, OrbitControls, View } from "@react-three/drei";
 import Nav from "../components/Nav";
-import EarthView from "../modelsComponent/EarthView";
-import { planetDetailsLists } from "../constants";
+import { fictionalPlanetDetailsLists } from "../constants";
 
 const PlanetDetail = () => {
   const { id } = useParams();
@@ -24,7 +21,7 @@ const PlanetDetail = () => {
     vd,
     model: Model,
     color
-  } = planetDetailsLists.find((planet) => planet.id === Number(id));
+  } = fictionalPlanetDetailsLists.find((planet) => planet.id === Number(id));
 
   return (
     // bg-planet-card-bg bg-cover

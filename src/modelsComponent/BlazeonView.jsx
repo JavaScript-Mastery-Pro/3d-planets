@@ -2,8 +2,9 @@ import { OrbitControls, Sparkles, useTexture } from "@react-three/drei";
 import React, { useMemo } from "react";
 import { ca, cd, cm, cn, fa, fd, fm, fn } from "../utils";
 import * as THREE from "three";
+import CommonViewer from "../components/CommonViewer";
 
-const MercuryView = () => {
+const BlazeonView = () => {
   const fTexture = useTexture(fm);
   const fnTexture = useTexture(fn);
   const fdTexture = useTexture(fd);
@@ -57,15 +58,7 @@ const MercuryView = () => {
 
   return (
     <>
-      <OrbitControls
-        enableZoom={false}
-        rotateSpeed={0.2}
-        autoRotate
-        autoRotateSpeed={0.2}
-        maxPolarAngle={Math.PI / 2}
-        enablePan={false}
-      />
-      <ambientLight intensity={0.5} />
+      <CommonViewer />
 
       <pointLight position={[3, 0, 3]} intensity={5} color={"#fff0f3"} />
       <pointLight position={[-3, -3, 3]} intensity={5} color={"#fff0f3"} />
@@ -83,8 +76,8 @@ const MercuryView = () => {
         speed={2}
         color={"#fff0f3"}
       />
-       
-      <mesh scale={[4, 4, 4]} position={[0, 1.5, 0]} castShadow>
+
+      <mesh scale={[4, 4, 4]} position={[0, 1.5, 0]}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial
           map={fTexture}
@@ -104,4 +97,4 @@ const MercuryView = () => {
   );
 };
 
-export default MercuryView;
+export default BlazeonView;

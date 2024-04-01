@@ -1,8 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import { planetCardLists } from "../constants";
-import { arrowImg } from "../utils";
+import { fictionalPlanetCardLists } from "../constants";
+import { arrowImg, fa, fm, mm } from "../utils";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, useTexture } from "@react-three/drei";
+import SmallPlanetsViewer from "../modelsComponent/SmallPlanetsViewer";
 
 const CardsContainer = () => {
   const nav = useNavigate();
@@ -12,19 +15,24 @@ const CardsContainer = () => {
   };
 
   return (
-    <div className="h-[90vh] flexCenter gap-10">
-      {planetCardLists.map((list) => (
+    <div className="flexCenter gap-14  flex-wrap mt-28">
+      {fictionalPlanetCardLists.map((list) => (
         <div className={`w-96 h-96`} key={list.id}>
           <div className="relative h-full bg-rectangle-card-bg bg-center bg-contain">
-            <img
+            {/* <img
               src={list.img}
               alt={list.title}
               className="absolute w-full h-full object-contain -translate-x-32 -translate-y-32 scale-110"
-            />
+            /> */}
+            <div className="w-60 h-60 absolute z-50 -top-14 -left-14">
+              <Canvas>
+                <SmallPlanetsViewer tex={list.map} />
+              </Canvas>
+            </div>
             <img
               src={arrowImg}
               alt="arrow"
-              className="absolute right-16 top-16 cursor-pointer z-10"
+              className="absolute right-16 top-16 cursor-pointer z-10 hover:border border-[#e0fbfc50] rounded-full transition-all"
               onClick={() => handleClick(list.id)}
             />
 

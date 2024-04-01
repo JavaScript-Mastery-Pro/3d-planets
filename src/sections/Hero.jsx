@@ -24,7 +24,6 @@ const Hero = () => {
           right: 0,
           overflow: "hidden",
         }}
-        shadows
         eventSource={document.getElementById("root")}
         // flat={true}
       >

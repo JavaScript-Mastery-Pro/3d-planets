@@ -18,8 +18,9 @@ import {
   ma,
 } from "../utils";
 import * as THREE from "three";
+import CommonViewer from "../components/CommonViewer";
 
-const EarthView = () => {
+const AuroraView = () => {
   const weedTexture = useTexture(weed);
   const weedNTexture = useTexture(weedN);
   const weedDTexture = useTexture(weedD);
@@ -104,15 +105,7 @@ const EarthView = () => {
 
   return (
     <>
-      <OrbitControls
-        enableZoom={false}
-        rotateSpeed={0.2}
-        autoRotate
-        autoRotateSpeed={0.2}
-        maxPolarAngle={Math.PI / 2}
-        enablePan={false}
-      />
-      <ambientLight intensity={0.5} />
+      <CommonViewer />
       {/* <pointLight position={[3, 0, 3]} intensity={5} color={"#ffbe0b"} />
       <pointLight position={[-3, 0, 3]} intensity={5} color={"#ffbe0b"} />
       <pointLight position={[-3, -3, -3]} intensity={5} color={"#ffb600"} />
@@ -159,4 +152,4 @@ const EarthView = () => {
   );
 };
 
-export default EarthView;
+export default AuroraView;

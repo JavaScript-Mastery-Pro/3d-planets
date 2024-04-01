@@ -2,8 +2,9 @@ import { OrbitControls, Sparkles, useTexture } from "@react-three/drei";
 import React, { useMemo } from "react";
 import { fa, fd, fm, fn, ja, jd, jm, jn } from "../utils";
 import * as THREE from "three";
+import CommonViewer from "../components/CommonViewer";
 
-const MarsView = () => {
+const ZephyrionView = () => {
   const jTexture = useTexture(jm);
   const jnTexture = useTexture(jn);
   const jdTexture = useTexture(jd);
@@ -30,15 +31,7 @@ const MarsView = () => {
   }, [ja]);
   return (
     <>
-      <OrbitControls
-        enableZoom={false}
-        rotateSpeed={0.2}
-        autoRotate
-        autoRotateSpeed={0.2}
-        maxPolarAngle={Math.PI / 2}
-        enablePan={false}
-      />
-      <ambientLight intensity={0.5} />
+      <CommonViewer />
 
       <pointLight position={[3, 0, 3]} intensity={5} color={"#d8f3dc"} />
       <pointLight position={[-3, -3, 3]} intensity={5} color={"#d8f3dc"} />
@@ -65,7 +58,7 @@ const MarsView = () => {
           displacementMap={jdTexture}
           displacementScale={0.05}
           aoMap={jaTexture}
-          aoMapIntensity={.5}
+          aoMapIntensity={0.5}
           //   bumpMap={sandBTexture}
           //   bumpScale={1.5}
           roughness={1}
@@ -76,4 +69,4 @@ const MarsView = () => {
   );
 };
 
-export default MarsView;
+export default ZephyrionView;
