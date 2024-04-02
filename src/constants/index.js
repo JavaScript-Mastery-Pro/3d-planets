@@ -1,4 +1,4 @@
-import { earthImg, earthVd, fm, jm, lm, marsImg, mc, mercuryImg, mm, ndc, ndm, sm } from "../utils";
+import { earthImg, earthVd, fm, im, jm, lm, marsImg, mc, mercuryImg, mm, ndc, ndm, sm } from "../utils";
 import BlazeonView from "../modelsComponent/BlazeonView";
 import AuroraView from "../modelsComponent/AuroraView";
 import ZephyrionView from "../modelsComponent/ZephyrionView";
@@ -112,7 +112,7 @@ export const fictionalPlanetCardLists = [
     g: "0.546 g",
     img: earthImg,
     path: "../assets/imgs/Mars.svg",
-    map: mm,
+    map: im,
   },
   {
     id: 5,
@@ -189,7 +189,7 @@ export const fictionalPlanetDetailsLists = [
     area: "987.1M",
     vd: earthVd,
     model: IgnisMajorView,
-    color: "#081c15",
+    color: "#000000",
   },
   {
     id: 5,

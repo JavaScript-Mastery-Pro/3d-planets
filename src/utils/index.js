@@ -64,6 +64,12 @@ import snImg from "../assets/imgs/textures/Spectra/sn.jpg";
 import sdImg from "../assets/imgs/textures/Spectra/sd.png";
 import saImg from "../assets/imgs/textures/Spectra/sa.jpg";
 
+import iImg from "../assets/imgs/textures/IgnisMajor/im.jpg";
+import inImg from "../assets/imgs/textures/IgnisMajor/in.jpg";
+import idImg from "../assets/imgs/textures/IgnisMajor/id.png";
+import iaImg from "../assets/imgs/textures/IgnisMajor/ia.jpg";
+import irImg from "../assets/imgs/textures/IgnisMajor/ir.jpg";
+
 import sunImg from "../assets/imgs/textures/earth/sun.jpeg";
 
 import loaderGif from "../assets/vds/load.gif";
@@ -136,6 +142,12 @@ export const sm = sImg;
 export const sn = snImg;
 export const sd = sdImg;
 export const sa = saImg;
+
+export const im = iImg;
+export const inn = inImg;
+export const idd = idImg;
+export const ia = iaImg;
+export const ir = inImg;
 
 export const sun = sunImg;
 
