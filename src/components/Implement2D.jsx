@@ -277,7 +277,10 @@ const Implement2D = () => {
         </div>
       </div>
       <div className="w-screen h-screen px-20 first">SeparatePlanet</div>
-      <CardsContainer />
+      <h1 className="font-sans text-6xl text-center font-extrabold">
+        Explore other planets
+      </h1>
+      <CardsContainer restrict={true} />
       <Nav border={false} isBack={false} />
     </div>
   );

@@ -10,7 +10,7 @@ const PlanetLists = () => {
     <div className="w-screen h-full bg-planet-card-bg bg-cover bg-no-repeat px-20 overflow-x-hidden">
       <Nav border={true} isBack={false} />
 
-      <CardsContainer />
+      <CardsContainer restrict={false} />
     </div>
   );
 };

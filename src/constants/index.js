@@ -156,7 +156,7 @@ export const fictionalPlanetDetailsLists = [
     area: "510.1M",
     vd: earthVd,
     model: BlazeonView,
-    color: "#3e000c",
+    color: "#4c110d",
   },
   {
     id: 2,
@@ -172,13 +172,13 @@ export const fictionalPlanetDetailsLists = [
   {
     id: 3,
     title: "Zephyrion",
-    des: "ZZephyrion is a serene, oceanic world located in the Tranquil Nebula, with its surface almost entirely covered by vast, undulating oceans. It's categorized as an aquatic planet with minimal landmasses, offering unique habitats for diverse marine life forms.",
+    des: "Zephyrion is a serene, oceanic world located in the Tranquil Nebula, with its surface almost entirely covered by vast, undulating oceans. It's categorized as an aquatic planet with minimal landmasses, offering unique habitats for diverse marine life forms.",
     diameter: "12,742",
     gravity: "0.371",
     area: "510.1M",
     vd: earthVd,
     model: ZephyrionView,
-    color: "#081c15",
+    color: "#142d19",
   },
   {
     id: 4,
@@ -200,7 +200,7 @@ export const fictionalPlanetDetailsLists = [
     area: "510.1M",
     vd: earthVd,
     model: VerdantiaView,
-    color: "#000000",
+    color: "#241508",
   },
   {
     id: 6,
@@ -211,7 +211,7 @@ export const fictionalPlanetDetailsLists = [
     area: "432.1M",
     vd: earthVd,
     model: SpectraView,
-    color: "#000004",
+    color: "#481213",
   },
   {
     id: 7,

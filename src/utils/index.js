@@ -66,6 +66,8 @@ import saImg from "../assets/imgs/textures/Spectra/sa.jpg";
 
 import sunImg from "../assets/imgs/textures/earth/sun.jpeg";
 
+import loaderGif from "../assets/vds/load.gif";
+
 // videos
 import earthMp4 from "../assets/vds/earth.mp4";
 
@@ -139,3 +141,5 @@ export const sun = sunImg;
 
 // videos
 export const earthVd = earthMp4;
+
+export const loaderVd = loaderGif;

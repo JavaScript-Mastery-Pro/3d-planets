@@ -1,22 +1,32 @@
-import React from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { fictionalPlanetCardLists } from "../constants";
-import { arrowImg, fa, fm, mm } from "../utils";
+import { arrowImg, fa, fm, loaderVd, mm } from "../utils";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useTexture } from "@react-three/drei";
 import SmallPlanetsViewer from "../modelsComponent/SmallPlanetsViewer";
 
-const CardsContainer = () => {
+const CardsContainer = ({ restrict }) => {
   const nav = useNavigate();
 
   const handleClick = (id) => {
     nav(`/planets/${id}`);
   };
 
+  const [array, setArray] = useState([]);
+
+  useEffect(() => {
+    if (restrict) {
+      setArray(fictionalPlanetCardLists.slice(0, 3));
+    } else {
+      setArray(fictionalPlanetCardLists);
+    }
+  }, []);
+
   return (
     <div className="flexCenter gap-14  flex-wrap mt-28">
-      {fictionalPlanetCardLists.map((list) => (
+      {array.map((list) => (
         <div className={`w-96 h-96`} key={list.id}>
           <div className="relative h-full bg-rectangle-card-bg bg-center bg-contain">
             {/* <img
@@ -25,8 +35,20 @@ const CardsContainer = () => {
               className="absolute w-full h-full object-contain -translate-x-32 -translate-y-32 scale-110"
             /> */}
             <div className="w-60 h-60 absolute z-50 -top-14 -left-14">
-              <Canvas>
-                <SmallPlanetsViewer tex={list.map} />
+              
+              <Canvas className="">
+                <Suspense
+                  fallback={() => {
+                    return (
+                      <mesh>
+                        <boxGeometry args={[1, 1, 1]} />
+                        <meshStandardMaterial color={"#f8f9fa"} />
+                      </mesh>
+                    );
+                  }}
+                >
+                  <SmallPlanetsViewer tex={list.map} />
+                </Suspense>
               </Canvas>
             </div>
             <img
