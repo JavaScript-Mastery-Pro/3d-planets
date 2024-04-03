@@ -52,7 +52,7 @@ import ndImg from "../assets/imgs/textures/Nebulon Delta/nd.jpg";
 import ndnImg from "../assets/imgs/textures/Nebulon Delta/ndn.jpg";
 import nddImg from "../assets/imgs/textures/Nebulon Delta/ndd.png";
 import ndaImg from "../assets/imgs/textures/Nebulon Delta/nda.jpg";
-import ndcImg from "../assets/imgs/textures/Nebulon Delta/ndc.png";
+import ndrImg from "../assets/imgs/textures/Nebulon Delta/ndr.jpg";
 
 import lImg from "../assets/imgs/textures/Verdantia/lm.jpg";
 import lnImg from "../assets/imgs/textures/Verdantia/ln.jpg";
@@ -63,6 +63,7 @@ import sImg from "../assets/imgs/textures/Spectra/sm.jpg";
 import snImg from "../assets/imgs/textures/Spectra/sn.jpg";
 import sdImg from "../assets/imgs/textures/Spectra/sd.png";
 import saImg from "../assets/imgs/textures/Spectra/sa.jpg";
+import srImg from "../assets/imgs/textures/Spectra/sr.jpg";
 
 import iImg from "../assets/imgs/textures/IgnisMajor/im.jpg";
 import inImg from "../assets/imgs/textures/IgnisMajor/in.jpg";
@@ -70,9 +71,15 @@ import idImg from "../assets/imgs/textures/IgnisMajor/id.png";
 import iaImg from "../assets/imgs/textures/IgnisMajor/ia.jpg";
 import irImg from "../assets/imgs/textures/IgnisMajor/ir.jpg";
 
+import emImg from "../assets/imgs/textures/HeroEarth/em.jpg";
+import ebImg from "../assets/imgs/textures/HeroEarth/eb.jpg";
+import esImg from "../assets/imgs/textures/HeroEarth/es.jpg";
+import ecImg from "../assets/imgs/textures/HeroEarth/ec.png";
+import enImg from "../assets/imgs/textures/HeroEarth/en.jpg";
+
 import sunImg from "../assets/imgs/textures/earth/sun.jpeg";
 
-import loaderGif from "../assets/vds/load.gif";
+import loaderGif from "../assets/vds/loader.gif";
 
 // videos
 import earthMp4 from "../assets/vds/earth.mp4";
@@ -131,7 +138,7 @@ export const ndm = ndImg;
 export const ndn = ndnImg;
 export const ndd = nddImg;
 export const nda = ndaImg;
-export const ndc = ndcImg;
+export const ndr = ndrImg;
 
 export const lm = lImg;
 export const ln = lnImg;
@@ -142,14 +149,21 @@ export const sm = sImg;
 export const sn = snImg;
 export const sd = sdImg;
 export const sa = saImg;
+export const sr = srImg;
 
 export const im = iImg;
 export const inn = inImg;
 export const idd = idImg;
 export const ia = iaImg;
-export const ir = inImg;
+export const ir = irImg;
 
 export const sun = sunImg;
+
+export const em = emImg;
+export const eb = ebImg;
+export const es = esImg;
+export const ec = ecImg;
+export const en = enImg;
 
 // videos
 export const earthVd = earthMp4;

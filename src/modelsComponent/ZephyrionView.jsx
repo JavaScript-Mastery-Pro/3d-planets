@@ -1,34 +1,51 @@
-import { OrbitControls, Sparkles, useTexture } from "@react-three/drei";
-import React, { useMemo } from "react";
-import { fa, fd, fm, fn, ja, jd, jm, jn } from "../utils";
+import { Sparkles } from "@react-three/drei";
+import React, { useMemo, useState, useEffect, useRef } from "react";
 import * as THREE from "three";
+
+// Internal imports
+import { ja, jd, jm, jn } from "../utils";
 import CommonViewer from "../components/CommonViewer";
+import PlanetLoader from "../components/PlanetLoader";
 
 const ZephyrionView = () => {
-  const jTexture = useTexture(jm);
-  const jnTexture = useTexture(jn);
-  const jdTexture = useTexture(jd);
-  const jaTexture = useTexture(ja);
+  const [isLoading, setIsLoading] = useState(true);
+  const sphere = useRef(new THREE.Mesh());
+
+  useEffect(() => {
+    sphere.current.visible = false;
+  }, [ja, jd, jm, jn]);
+
+  const manager = new THREE.LoadingManager();
+  manager.onLoad = function () {
+    setIsLoading(false);
+    sphere.current.visible = true;
+  };
+
+  const texture = new THREE.TextureLoader(manager).load(jm);
+  const normal = new THREE.TextureLoader(manager).load(jn);
+  const displacement = new THREE.TextureLoader(manager).load(jd);
+  const aomap = new THREE.TextureLoader(manager).load(ja);
 
   useMemo(() => {
-    jTexture.wrapS = jTexture.wrapT = THREE.RepeatWrapping;
-    jTexture.repeat.setScalar(4);
-  }, [jm]);
+    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+    texture.repeat.setScalar(4);
+  }, [texture]);
 
   useMemo(() => {
-    jnTexture.wrapS = jnTexture.wrapT = THREE.RepeatWrapping;
-    jnTexture.repeat.setScalar(4);
-  }, [jn]);
+    normal.wrapS = normal.wrapT = THREE.RepeatWrapping;
+    normal.repeat.setScalar(4);
+  }, [normal]);
 
   useMemo(() => {
-    jdTexture.wrapS = jdTexture.wrapT = THREE.RepeatWrapping;
-    jdTexture.repeat.setScalar(4);
-  }, [jd]);
+    displacement.wrapS = displacement.wrapT = THREE.RepeatWrapping;
+    displacement.repeat.setScalar(4);
+  }, [displacement]);
 
   useMemo(() => {
-    jaTexture.wrapS = jaTexture.wrapT = THREE.RepeatWrapping;
-    jaTexture.repeat.setScalar(4);
-  }, [ja]);
+    aomap.wrapS = aomap.wrapT = THREE.RepeatWrapping;
+    aomap.repeat.setScalar(4);
+  }, [aomap]);
+
   return (
     <>
       <CommonViewer />
@@ -49,20 +66,20 @@ const ZephyrionView = () => {
         speed={2}
         color={"#52b788"}
       />
-      <mesh scale={[4, 4, 4]} position={[0, 1.5, 0]}>
+
+      <PlanetLoader isLoading={isLoading} />
+
+      <mesh scale={[4, 4, 4]} position={[0, 1.5, 0]} ref={sphere}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial
-          map={jTexture}
-          normalMap={jnTexture}
-          normalScale={[1, 1]}
-          displacementMap={jdTexture}
+          map={texture}
+          normalMap={normal}
+          normalScale={1}
+          displacementMap={displacement}
           displacementScale={0.05}
-          aoMap={jaTexture}
+          aoMap={aomap}
           aoMapIntensity={0.5}
-          //   bumpMap={sandBTexture}
-          //   bumpScale={1.5}
           roughness={1}
-          //   color={"yellow"}
         />
       </mesh>
     </>

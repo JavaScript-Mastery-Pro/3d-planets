@@ -1,4 +1,4 @@
-import { earthImg, earthVd, fm, im, jm, lm, marsImg, mc, mercuryImg, mm, ndc, ndm, sm } from "../utils";
+import { earthImg, earthVd, fm, im, jm, lm, marsImg, mc, mercuryImg, mm, ndr, ndm, sm } from "../utils";
 import BlazeonView from "../modelsComponent/BlazeonView";
 import AuroraView from "../modelsComponent/AuroraView";
 import ZephyrionView from "../modelsComponent/ZephyrionView";

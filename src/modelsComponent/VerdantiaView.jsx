@@ -1,38 +1,53 @@
-import React, { useMemo } from "react";
-import CommonViewer from "../components/CommonViewer";
-import { Sparkles, useTexture } from "@react-three/drei";
-import { la, ld, lm, ln } from "../utils";
+import React, { useMemo, useState, useRef, useEffect } from "react";
+import { Sparkles } from "@react-three/drei";
 import * as THREE from "three";
-import { Perf } from "r3f-perf";
+
+// Internal imports
+import { la, ld, lm, ln } from "../utils";
+import CommonViewer from "../components/CommonViewer";
+import PlanetLoader from "../components/PlanetLoader";
 
 const VerdantiaView = () => {
-  const lTexture = useTexture(lm);
-  const lnTexture = useTexture(ln);
-  const ldTexture = useTexture(ld);
-  const laTexture = useTexture(la);
+  const [isLoading, setIsLoading] = useState(true);
+  const sphere = useRef(new THREE.Mesh());
+
+  useEffect(() => {
+    sphere.current.visible = false;
+  }, [la, ld, lm, ln]);
+
+  const manager = new THREE.LoadingManager();
+  manager.onLoad = function () {
+    setIsLoading(false);
+    sphere.current.visible = true;
+  };
+
+  const texture = new THREE.TextureLoader(manager).load(lm);
+  const normal = new THREE.TextureLoader(manager).load(ln);
+  const displacement = new THREE.TextureLoader(manager).load(ld);
+  const aomap = new THREE.TextureLoader(manager).load(la);
 
   useMemo(() => {
-    lTexture.wrapS = lTexture.wrapT = THREE.RepeatWrapping;
-    lTexture.repeat.setScalar(4);
-  }, [lm]);
+    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+    texture.repeat.setScalar(4);
+  }, [texture]);
 
   useMemo(() => {
-    lnTexture.wrapS = lnTexture.wrapT = THREE.RepeatWrapping;
-    lnTexture.repeat.setScalar(4);
-  }, [ln]);
+    normal.wrapS = normal.wrapT = THREE.RepeatWrapping;
+    normal.repeat.setScalar(4);
+  }, [normal]);
 
   useMemo(() => {
-    ldTexture.wrapS = ldTexture.wrapT = THREE.RepeatWrapping;
-    ldTexture.repeat.setScalar(4);
-  }, [ld]);
+    displacement.wrapS = displacement.wrapT = THREE.RepeatWrapping;
+    displacement.repeat.setScalar(4);
+  }, [displacement]);
 
   useMemo(() => {
-    laTexture.wrapS = laTexture.wrapT = THREE.RepeatWrapping;
-    laTexture.repeat.setScalar(4);
-  }, [la]);
+    aomap.wrapS = aomap.wrapT = THREE.RepeatWrapping;
+    aomap.repeat.setScalar(4);
+  }, [aomap]);
+
   return (
     <>
-     
       <CommonViewer />
       <pointLight position={[3, 0, 3]} intensity={5} color={"#fdc500"} />
       <pointLight position={[-3, -3, 3]} intensity={5} color={"#ff7b00"} />
@@ -50,15 +65,18 @@ const VerdantiaView = () => {
         speed={2}
         color={"#ffd60a"}
       />
-      <mesh scale={[4, 4, 4]} position={[0, 1.5, 0]}>
+
+      <PlanetLoader isLoading={isLoading} />
+
+      <mesh scale={[4, 4, 4]} position={[0, 1.5, 0]} ref={sphere}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial
-          map={lTexture}
-          normalMap={lnTexture}
+          map={texture}
+          normalMap={normal}
           normalScale={[1, 1]}
           // displacementMap={ldTexture}
           // displacementScale={0.05}
-          aoMap={laTexture}
+          aoMap={aomap}
           aoMapIntensity={0.9}
           roughness={1}
         />

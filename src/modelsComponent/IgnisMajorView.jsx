@@ -1,42 +1,56 @@
-import React, { useMemo } from "react";
-import CommonViewer from "../components/CommonViewer";
-import { useTexture } from "@react-three/drei";
+import React, { useMemo, useState, useEffect, useRef } from "react";
 import { Sparkles } from "@react-three/drei";
 import * as THREE from "three";
+
+// Internal imports
+import CommonViewer from "../components/CommonViewer";
 import { im, inn, idd, ia, ir } from "../utils";
-import { Perf } from "r3f-perf";
+import PlanetLoader from "../components/PlanetLoader";
 
 const IgnisMajorView = () => {
-  const imTexture = useTexture(im);
-  const innTexture = useTexture(inn);
-  const iddTexture = useTexture(idd);
-  const iaTexture = useTexture(ia);
-  const irTexture = useTexture(ir);
+  const [isLoading, setIsLoading] = useState(true);
+  const sphere = useRef(new THREE.Mesh());
+
+  useEffect(() => {
+    sphere.current.visible = false;
+  }, [im, inn, idd, ia, ir]);
+
+  const manager = new THREE.LoadingManager();
+  manager.onLoad = function () {
+    setIsLoading(false);
+    sphere.current.visible = true;
+  };
+
+  const texture = new THREE.TextureLoader(manager).load(im);
+  const normal = new THREE.TextureLoader(manager).load(inn);
+  const displacement = new THREE.TextureLoader(manager).load(idd);
+  const aomap = new THREE.TextureLoader(manager).load(ia);
+  const roughness = new THREE.TextureLoader(manager).load(ir);
 
   useMemo(() => {
-    imTexture.wrapS = imTexture.wrapT = THREE.RepeatWrapping;
-    imTexture.repeat.setScalar(4);
-  }, [im]);
+    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+    texture.repeat.setScalar(4);
+  }, [texture]);
 
   useMemo(() => {
-    innTexture.wrapS = innTexture.wrapT = THREE.RepeatWrapping;
-    innTexture.repeat.setScalar(4);
-  }, [inn]);
+    normal.wrapS = normal.wrapT = THREE.RepeatWrapping;
+    normal.repeat.setScalar(4);
+  }, [normal]);
 
   useMemo(() => {
-    iddTexture.wrapS = iddTexture.wrapT = THREE.RepeatWrapping;
-    iddTexture.repeat.setScalar(4);
-  }, [idd]);
+    displacement.wrapS = displacement.wrapT = THREE.RepeatWrapping;
+    displacement.repeat.setScalar(4);
+  }, [displacement]);
 
   useMemo(() => {
-    iaTexture.wrapS = iaTexture.wrapT = THREE.RepeatWrapping;
-    iaTexture.repeat.setScalar(4);
-  }, [ia]);
+    aomap.wrapS = aomap.wrapT = THREE.RepeatWrapping;
+    aomap.repeat.setScalar(4);
+  }, [aomap]);
 
   useMemo(() => {
-    irTexture.wrapS = irTexture.wrapT = THREE.RepeatWrapping;
-    irTexture.repeat.setScalar(4);
-  }, [ir]);
+    roughness.wrapS = roughness.wrapT = THREE.RepeatWrapping;
+    roughness.repeat.setScalar(4);
+  }, [roughness]);
 
   return (
     <>
@@ -57,18 +71,21 @@ const IgnisMajorView = () => {
         speed={2}
         color={"#ffffff"}
       />
-      <mesh scale={[4, 4, 4]} position={[0, 1.5, 0]}>
+
+      <PlanetLoader isLoading={isLoading} />
+
+      <mesh scale={[4, 4, 4]} position={[0, 1.5, 0]} ref={sphere}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial
-          map={imTexture}
-          normalMap={innTexture}
+          map={texture}
+          normalMap={normal}
           normalScale={0.5}
-          aoMap={iaTexture}
+          aoMap={aomap}
           aoMapIntensity={0.5}
-          displacementMap={iddTexture}
+          displacementMap={displacement}
           displacementScale={0.05}
-          roughnessMap={irTexture}
-          roughness={0}
+          roughnessMap={roughness}
+          roughness={0.5}
         />
       </mesh>
     </>

@@ -1,36 +1,57 @@
-import React, { useMemo } from "react";
-import CommonViewer from "../components/CommonViewer";
-import { useTexture } from "@react-three/drei";
+import React, { useMemo, useState, useEffect, useRef } from "react";
 import { Sparkles } from "@react-three/drei";
 import * as THREE from "three";
-import { ndm, ndn, ndd, nda } from "../utils";
-import { Perf } from "r3f-perf";
+
+// Internal imports
+import CommonViewer from "../components/CommonViewer";
+import { ndm, ndn, ndd, nda, ndr } from "../utils";
+import PlanetLoader from "../components/PlanetLoader";
 
 const NebulonView = () => {
-  const ndTexture = useTexture(ndm);
-  const ndnTexture = useTexture(ndn);
-  const nddTexture = useTexture(ndd);
-  const ndaTexture = useTexture(nda);
+  const [isLoading, setIsLoading] = useState(true);
+  const sphere = useRef(new THREE.Mesh());
+
+  useEffect(() => {
+    sphere.current.visible = false;
+  }, [nda, ndd, ndm, ndn, ndr]);
+
+  const manager = new THREE.LoadingManager();
+  manager.onLoad = function () {
+    setIsLoading(false);
+    sphere.current.visible = true;
+  };
+
+  const texture = new THREE.TextureLoader(manager).load(ndm);
+  const normal = new THREE.TextureLoader(manager).load(ndn);
+  const displacement = new THREE.TextureLoader(manager).load(ndd);
+  const aomap = new THREE.TextureLoader(manager).load(nda);
+  const roughness = new THREE.TextureLoader(manager).load(ndr);
 
   useMemo(() => {
-    ndTexture.wrapS = ndTexture.wrapT = THREE.RepeatWrapping;
-    ndTexture.repeat.setScalar(4);
-  }, [ndm]);
+    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+    texture.repeat.setScalar(4);
+  }, [texture]);
 
   useMemo(() => {
-    ndnTexture.wrapS = ndnTexture.wrapT = THREE.RepeatWrapping;
-    ndnTexture.repeat.setScalar(4);
-  }, [ndn]);
+    normal.wrapS = normal.wrapT = THREE.RepeatWrapping;
+    normal.repeat.setScalar(4);
+  }, [normal]);
 
   useMemo(() => {
-    nddTexture.wrapS = nddTexture.wrapT = THREE.RepeatWrapping;
-    nddTexture.repeat.setScalar(4);
-  }, [ndd]);
+    displacement.wrapS = displacement.wrapT = THREE.RepeatWrapping;
+    displacement.repeat.setScalar(4);
+  }, [displacement]);
 
   useMemo(() => {
-    ndaTexture.wrapS = ndaTexture.wrapT = THREE.RepeatWrapping;
-    ndaTexture.repeat.setScalar(4);
-  }, [nda]);
+    aomap.wrapS = aomap.wrapT = THREE.RepeatWrapping;
+    aomap.repeat.setScalar(4);
+  }, [aomap]);
+
+  useMemo(() => {
+    roughness.wrapS = roughness.wrapT = THREE.RepeatWrapping;
+    roughness.repeat.setScalar(4);
+  }, [roughness]);
+
   return (
     <>
       <CommonViewer />
@@ -50,20 +71,21 @@ const NebulonView = () => {
         speed={2}
         color={"#52b788"}
       />
-      <mesh scale={[4, 4, 4]} position={[0, 1.5, 0]}>
+
+      <PlanetLoader isLoading={isLoading} />
+
+      <mesh scale={[4, 4, 4]} position={[0, 1.5, 0]} ref={sphere}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial
-          map={ndTexture}
-          normalMap={ndnTexture}
-          normalScale={[1, 1]}
+          map={texture}
+          normalMap={normal}
+          normalScale={1}
           // displacementMap={nddTexture}
           // displacementScale={0.05}
-          aoMap={ndaTexture}
+          aoMap={displacement}
           aoMapIntensity={0.9}
-          //   bumpMap={sandBTexture}
-          //   bumpScale={1.5}
+          roughnessMap={roughness}
           roughness={0}
-          //   color={"yellow"}
         />
       </mesh>
     </>

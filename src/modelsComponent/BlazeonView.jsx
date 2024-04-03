@@ -1,60 +1,50 @@
-import { OrbitControls, Sparkles, useTexture } from "@react-three/drei";
-import React, { useMemo } from "react";
-import { ca, cd, cm, cn, fa, fd, fm, fn } from "../utils";
+import { Sparkles } from "@react-three/drei";
 import * as THREE from "three";
+import React, { useMemo, useState, useRef, useEffect } from "react";
+
+// Internal imports
+import { fa, fd, fm, fn } from "../utils";
 import CommonViewer from "../components/CommonViewer";
+import PlanetLoader from "../components/PlanetLoader";
 
 const BlazeonView = () => {
-  const fTexture = useTexture(fm);
-  const fnTexture = useTexture(fn);
-  const fdTexture = useTexture(fd);
-  const faTexture = useTexture(fa);
+  const [isLoading, setIsLoading] = useState(true);
+  const sphere = useRef(new THREE.Mesh());
 
-  const cTexture = useTexture(cm);
-  const cnTexture = useTexture(cn);
-  const cdTexture = useTexture(cd);
-  const caTexture = useTexture(ca);
+  useEffect(() => {
+    sphere.current.visible = false;
+  }, [fa, fd, fm, fn]);
 
-  useMemo(() => {
-    fTexture.wrapS = fTexture.wrapT = THREE.RepeatWrapping;
-    fTexture.repeat.setScalar(4);
-  }, [fm]);
+  const manager = new THREE.LoadingManager();
+  manager.onLoad = function () {
+    setIsLoading(false);
+    sphere.current.visible = true;
+  };
 
-  useMemo(() => {
-    fnTexture.wrapS = fnTexture.wrapT = THREE.RepeatWrapping;
-    fnTexture.repeat.setScalar(4);
-  }, [fn]);
+  const texture = new THREE.TextureLoader(manager).load(fm);
+  const normal = new THREE.TextureLoader(manager).load(fn);
+  const displacement = new THREE.TextureLoader(manager).load(fa);
+  const aomap = new THREE.TextureLoader(manager).load(fd);
 
   useMemo(() => {
-    fdTexture.wrapS = fdTexture.wrapT = THREE.RepeatWrapping;
-    fdTexture.repeat.setScalar(4);
-  }, [fd]);
+    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+    texture.repeat.setScalar(4);
+  }, [texture]);
 
   useMemo(() => {
-    faTexture.wrapS = faTexture.wrapT = THREE.RepeatWrapping;
-    faTexture.repeat.setScalar(4);
-  }, [fa]);
-
-  // next texture
-  useMemo(() => {
-    cTexture.wrapS = cTexture.wrapT = THREE.RepeatWrapping;
-    cTexture.repeat.setScalar(4);
-  }, [cm]);
+    normal.wrapS = normal.wrapT = THREE.RepeatWrapping;
+    normal.repeat.setScalar(4);
+  }, [normal]);
 
   useMemo(() => {
-    cnTexture.wrapS = cnTexture.wrapT = THREE.RepeatWrapping;
-    cnTexture.repeat.setScalar(4);
-  }, [cn]);
+    displacement.wrapS = displacement.wrapT = THREE.RepeatWrapping;
+    displacement.repeat.setScalar(4);
+  }, [displacement]);
 
   useMemo(() => {
-    cdTexture.wrapS = cdTexture.wrapT = THREE.RepeatWrapping;
-    cdTexture.repeat.setScalar(4);
-  }, [cd]);
-
-  useMemo(() => {
-    caTexture.wrapS = caTexture.wrapT = THREE.RepeatWrapping;
-    caTexture.repeat.setScalar(4);
-  }, [ca]);
+    aomap.wrapS = aomap.wrapT = THREE.RepeatWrapping;
+    aomap.repeat.setScalar(4);
+  }, [aomap]);
 
   return (
     <>
@@ -77,20 +67,20 @@ const BlazeonView = () => {
         color={"#fff0f3"}
       />
 
-      <mesh scale={[4, 4, 4]} position={[0, 1.5, 0]}>
+      <PlanetLoader isLoading={isLoading} />
+
+      <mesh scale={[4, 4, 4]} position={[0, 1.5, 0]} ref={sphere}>
         <sphereGeometry args={[1, 32, 32]} />
+        {/* you can play around here */}
         <meshStandardMaterial
-          map={fTexture}
-          normalMap={fnTexture}
-          normalScale={[1, 1]}
-          displacementMap={fdTexture}
-          displacementScale={0.09}
-          aoMap={faTexture}
-          aoMapIntensity={1.5}
-          //   bumpMap={sandBTexture}
-          //   bumpScale={1.5}
-          roughness={1}
-          //   color={"pink"}
+          map={texture}
+          normalMap={normal}
+          normalScale={0.1}
+          // displacementMap={displacement}
+          // displacementScale={0.01}
+          aoMap={aomap}
+          aoMapIntensity={0.5}
+          roughness={0}
         />
       </mesh>
     </>

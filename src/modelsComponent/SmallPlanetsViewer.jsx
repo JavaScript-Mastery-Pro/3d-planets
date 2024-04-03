@@ -1,34 +1,12 @@
-import {
-  Html,
-  OrbitControls,
-  Outlines,
-  Sparkles,
-  useTexture,
-} from "@react-three/drei";
-import { useLoader } from "@react-three/fiber";
-import { progress } from "framer-motion";
-import { Perf } from "r3f-perf";
-import React, { Suspense, useEffect, useRef, useState } from "react";
+import { OrbitControls } from "@react-three/drei";
+import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import { loaderVd } from "../utils";
+// Internal imports
+import PlanetLoader from "../components/PlanetLoader";
 
 const SmallPlanetsViewer = ({ tex }) => {
   const [isLoading, setIsLoading] = useState(true);
   const sphere = useRef(new THREE.Mesh());
-
-  // const texture = useTexture(tex, (loader) => {
-  //   console.log("loaded", loaded);
-  //   setLoaded(false);
-  // });
-  // const texture = new THREE.TextureLoader().load(
-  //   tex,
-  //   (load) => {
-  //     console.log(load);
-  //   },
-  //   (progress) => {
-  //     console.log(progress);
-  //   }
-  // );
 
   useEffect(() => {
     sphere.current.visible = false;
@@ -36,35 +14,14 @@ const SmallPlanetsViewer = ({ tex }) => {
 
   const manager = new THREE.LoadingManager();
   manager.onLoad = function () {
-    console.log("Loading complete!");
     setIsLoading(false);
     sphere.current.visible = true;
   };
-  manager.onProgress = function (url, itemsLoaded, itemsTotal) {
-    console.log(
-      "Loading file: " +
-        url +
-        ".\nLoaded " +
-        itemsLoaded +
-        " of " +
-        itemsTotal +
-        " files."
-    );
-  };
-  const texture = new THREE.TextureLoader(manager).load(
-    tex
-    // (load) => {
-    //   console.log(load);
-    // },
-    // (progress) => {
-    //   console.log(progress);
-    // }
-  );
-  const [hovered, hover] = useState(false);
-  const ref = useRef();
+
+  const texture = new THREE.TextureLoader(manager).load(tex);
+
   return (
     <>
-      {/* <Perf position={"bottom-left"} /> */}
       <OrbitControls
         enableZoom={false}
         rotateSpeed={0.2}
@@ -82,27 +39,12 @@ const SmallPlanetsViewer = ({ tex }) => {
         intensity={5}
         color={"#f8f9fa"}
       />
-      {isLoading && (
-        // <mesh>
-        //   <boxGeometry args={[1, 1, 1]} />
-        //   <meshStandardMaterial color={"pink"} />
-        // </mesh>
-        <Html className="absolute w-96 h-60 -left-10 -top-28">
-          <div className="w-60 h-60 absolute -left-20 flexCenter">
-            {/* <p className="text-white">Loading...</p> */}
-            <img src={loaderVd} width={100} height={100} />
-          </div>
-        </Html>
-      )}
-      <mesh
-        scale={[2.25, 2.25, 2.25]}
-        // onPointerOver={() => hover(true)}
-        // onPointerOut={() => hover(false)}
-        ref={sphere}
-      >
+
+      <PlanetLoader isLoading={isLoading} />
+
+      <mesh scale={[2.25, 2.25, 2.25]} ref={sphere}>
         <sphereGeometry args={[1, 16, 16]} />
         <meshStandardMaterial map={texture} />
-        {/* <Outlines thickness={0.025} color={hovered ? "#80ffdb" : "black"} /> */}
       </mesh>
     </>
   );
