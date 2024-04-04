@@ -1,10 +1,10 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-import { fictionalPlanetCardLists } from "../constants";
-import { arrowImg, fa, fm, loaderVd, mm } from "../utils";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useTexture } from "@react-three/drei";
+
+// Internal imports
+import { fictionalPlanetCardLists } from "../constants";
+import { arrowImg } from "../utils";
 import SmallPlanetsViewer from "../modelsComponent/SmallPlanetsViewer";
 
 const CardsContainer = ({ restrict }) => {
@@ -25,17 +25,11 @@ const CardsContainer = ({ restrict }) => {
   }, []);
 
   return (
-    <div className="flexCenter gap-14  flex-wrap mt-28">
+    <div className="flexCenter gap-0 md:gap-14 flex-wrap mt-28">
       {array.map((list) => (
         <div className={`w-96 h-96`} key={list.id}>
-          <div className="relative h-full bg-rectangle-card-bg bg-center bg-contain">
-            {/* <img
-              src={list.img}
-              alt={list.title}
-              className="absolute w-full h-full object-contain -translate-x-32 -translate-y-32 scale-110"
-            /> */}
+          <div className="relative h-full bg-rectangle-card-bg bg-no-repeat bg-center bg-contain">
             <div className="w-60 h-60 absolute z-50 -top-14 -left-14">
-              
               <Canvas className="">
                 <Suspense
                   fallback={() => {
@@ -54,7 +48,7 @@ const CardsContainer = ({ restrict }) => {
             <img
               src={arrowImg}
               alt="arrow"
-              className="absolute right-16 top-16 cursor-pointer z-10 hover:border border-[#e0fbfc50] rounded-full transition-all"
+              className="absolute right-5 md:right-16 top-16 cursor-pointer z-10 hover:border border-[#e0fbfc50] rounded-full transition-all"
               onClick={() => handleClick(list.id)}
             />
 

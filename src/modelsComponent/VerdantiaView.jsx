@@ -1,5 +1,4 @@
 import React, { useMemo, useState, useRef, useEffect } from "react";
-import { Sparkles } from "@react-three/drei";
 import * as THREE from "three";
 
 // Internal imports
@@ -14,6 +13,8 @@ const VerdantiaView = () => {
   useEffect(() => {
     sphere.current.visible = false;
   }, [la, ld, lm, ln]);
+
+  const scalingFactor = Math.min(Math.max(window.innerWidth / 1200, 0.5), 1.01);
 
   const manager = new THREE.LoadingManager();
   manager.onLoad = function () {
@@ -48,27 +49,17 @@ const VerdantiaView = () => {
 
   return (
     <>
-      <CommonViewer />
+      <CommonViewer sparkle={"#ffd60a"} rectAreaLight={"#ffd60a"} />
       <pointLight position={[3, 0, 3]} intensity={5} color={"#fdc500"} />
       <pointLight position={[-3, -3, 3]} intensity={5} color={"#ff7b00"} />
-      <rectAreaLight
-        rotation={[Math.PI / 2, 0, 0]}
-        position={[0, -5, -1]}
-        intensity={10}
-        color={"#ffd60a"}
-      />
-
-      <Sparkles
-        count={500}
-        scale={[15, 5, 10]}
-        size={1.5}
-        speed={2}
-        color={"#ffd60a"}
-      />
 
       <PlanetLoader isLoading={isLoading} />
 
-      <mesh scale={[4, 4, 4]} position={[0, 1.5, 0]} ref={sphere}>
+      <mesh
+        scale={scalingFactor * 4}
+        position={[0, scalingFactor * 1.5, 0]}
+        ref={sphere}
+      >
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial
           map={texture}

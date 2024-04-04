@@ -1,4 +1,3 @@
-import { Sparkles } from "@react-three/drei";
 import React, { useMemo, useState, useEffect, useRef } from "react";
 import * as THREE from "three";
 
@@ -10,6 +9,8 @@ import PlanetLoader from "../components/PlanetLoader";
 const ZephyrionView = () => {
   const [isLoading, setIsLoading] = useState(true);
   const sphere = useRef(new THREE.Mesh());
+
+  const scalingFactor = Math.min(Math.max(window.innerWidth / 1200, 0.5), 1.01);
 
   useEffect(() => {
     sphere.current.visible = false;
@@ -48,28 +49,18 @@ const ZephyrionView = () => {
 
   return (
     <>
-      <CommonViewer />
+      <CommonViewer sparkle={"#52b788"} rectAreaLight={"#52b69a"} />
 
       <pointLight position={[3, 0, 3]} intensity={5} color={"#d8f3dc"} />
       <pointLight position={[-3, -3, 3]} intensity={5} color={"#d8f3dc"} />
-      <rectAreaLight
-        rotation={[Math.PI / 2, 0, 0]}
-        position={[0, -5, -1]}
-        intensity={10}
-        color={"#52b69a"}
-      />
-
-      <Sparkles
-        count={500}
-        scale={[15, 5, 10]}
-        size={1.5}
-        speed={2}
-        color={"#52b788"}
-      />
 
       <PlanetLoader isLoading={isLoading} />
 
-      <mesh scale={[4, 4, 4]} position={[0, 1.5, 0]} ref={sphere}>
+      <mesh
+        scale={scalingFactor * 4}
+        position={[0, scalingFactor * 1.5, 0]}
+        ref={sphere}
+      >
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial
           map={texture}

@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+
+// Import internals
 import { backImg } from "../utils";
 
 const Nav = ({ border, isBack }) => {
@@ -12,7 +14,7 @@ const Nav = ({ border, isBack }) => {
   };
 
   const handlePlanet = () => {
-    planet("/planets"); 
+    planet("/planets");
   };
 
   const handleBack = () => {
@@ -29,7 +31,11 @@ const Nav = ({ border, isBack }) => {
         <div className="flex cursor-pointer ">
           <img src={backImg} alt="back arrow" />
           <p
-            className="sub-text ms-2 transition-all hover:text-primary"
+            className={`sub-text ms-2 transition-all ${
+              isBack
+                ? "text-primary hover:text-secondary"
+                : "text-secondary hover:text-primary"
+            }`}
             onClick={handleBack}
           >
             Back
@@ -41,13 +47,21 @@ const Nav = ({ border, isBack }) => {
 
       <div className="flex gap-10">
         <p
-          className="sub-text cursor-pointer transition-all hover:text-primary"
+          className={`nav-text ${
+            isBack
+              ? "text-primary hover:text-secondary"
+              : "text-secondary hover:text-primary"
+          }`}
           onClick={handleHome}
         >
           Home
         </p>
         <p
-          className="sub-text cursor-pointer transition-all hover:text-primary"
+          className={`nav-text ${
+            isBack
+              ? "text-primary hover:text-secondary"
+              : "text-secondary hover:text-primary"
+          }`}
           onClick={handlePlanet}
         >
           Planets

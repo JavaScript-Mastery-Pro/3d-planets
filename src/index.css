@@ -69,7 +69,7 @@ body {
   left: 0;
   right: 0;
   margin: auto;
-  transform: translateY(-50%) ;
+  transform: translateY(-50%);
 }
 .obj-2 {
   /* width: 50vw; */
@@ -116,9 +116,12 @@ body {
     @apply flex justify-center items-center;
   }
   .detail-sub-text {
-    @apply sub-text text-lg w-[50vw] text-primary;
+    @apply sub-text text-lg w-full text-center text-primary;
   }
   .info-sub-text {
     @apply tracking-widest text-secondary text-lg uppercase;
+  }
+  .nav-text {
+    @apply sub-text cursor-pointer transition-all;
   }
 }

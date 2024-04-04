@@ -1,7 +1,6 @@
 import React from "react";
 import Lenis from "@studio-freight/lenis";
 
-import { addEffect } from "@react-three/fiber";
 import { Route, Routes } from "react-router-dom";
 
 import Home from "./sections/Home";

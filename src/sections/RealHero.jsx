@@ -1,8 +1,9 @@
 import { Canvas } from "@react-three/fiber";
-import React, { useEffect, useRef, useState } from "react";
-import { Sparkles, View } from "@react-three/drei";
+import React, { useEffect } from "react";
+import { View } from "@react-three/drei";
 import gsap from "gsap";
-import * as THREE from "three";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 // Import internals
 import Nav from "../components/Nav";
@@ -12,10 +13,9 @@ import EarthView from "../modelsComponent/EarthView";
 import CardsContainer from "../components/CardsContainer";
 import EarthInfo from "../components/EarthInfo";
 
-const RealHero = () => {
-  const earth = useRef(new THREE.Mesh());
-  const camera = useRef(new THREE.Camera());
+let mobile = window.innerWidth < 768;
 
+const RealHero = () => {
   useEffect(() => {
     gsap.to(".view", {
       scrollTrigger: {
@@ -25,8 +25,8 @@ const RealHero = () => {
         end: "bottom bottom",
         // markers: true,
       },
-      top: "110%",
-      left: "45%",
+      top: mobile ? "130%" : "110%",
+      left: mobile ? "0%" : "45%",
       transform: "translateX(0%)  ",
       duration: 5,
       ease: "power1.out",
@@ -42,10 +42,10 @@ const RealHero = () => {
           end: "bottom 110%",
           // markers: true,
         },
-        top: "200%",
-        left: "5%",
+        top: mobile ? "225%" : "205%",
+        left: mobile ? "0%" : "5%",
         transform: "translateX(0%)",
-        duration: 5,
+        duration: 10,
         ease: "power1.in",
         immediateRender: false,
       },
@@ -54,7 +54,7 @@ const RealHero = () => {
   }, []);
 
   return (
-    <div className="w-screen px-20">
+    <div className="w-screen px-10 lg:px-20 ">
       <Nav border={true} isBack={false} />
       <Canvas
         className="w-screen h-screen z-50 "
@@ -70,17 +70,17 @@ const RealHero = () => {
       >
         <View.Port />
       </Canvas>
-      <EarthView camera={camera} earth={earth} view={"view"} detail={true} />
+      <EarthView view={"view"} />
 
       <HeroOverLay />
       <div className="h-screen relative flex justify-start items-center detail">
         <EarthDetail />
       </div>
-      <div className="h-screen relative flex justify-end items-center info">
+      <div className="md:h-screen h-full relative flex justify-end items-center info">
         <EarthInfo />
       </div>
-      <div className="my-32">
-        <h1 className="text-5xl text-center font-sans tracking-wider">
+      <div className="md:my-32">
+        <h1 className="text-lg font-extrabold md:text-5xl text-center font-sans tracking-wider">
           EXPLORE OTHER PLANETS
         </h1>
         <CardsContainer restrict={true} />

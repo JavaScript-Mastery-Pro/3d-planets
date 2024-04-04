@@ -1,4 +1,3 @@
-import { Sparkles } from "@react-three/drei";
 import React, { useEffect, useMemo, useState, useRef } from "react";
 import * as THREE from "three";
 // Internal imports
@@ -9,6 +8,8 @@ import PlanetLoader from "../components/PlanetLoader";
 const AuroraView = () => {
   const [isLoading, setIsLoading] = useState(true);
   const sphere = useRef(new THREE.Mesh());
+
+  const scalingFactor = Math.min(Math.max(window.innerWidth / 1200, 0.5), 1.01);
 
   useEffect(() => {
     sphere.current.visible = false;
@@ -47,27 +48,17 @@ const AuroraView = () => {
 
   return (
     <>
-      <CommonViewer />
+      <CommonViewer sparkle={"#4cc9f0"} rectAreaLight={"#caf0f8"} />
 
       <pointLight position={[3, -1, 3]} intensity={5} color={"#00b4d8"} />
-      <rectAreaLight
-        rotation={[Math.PI / 2, 0, 0]}
-        position={[0, -5, -1]}
-        intensity={10}
-        color={"#caf0f8"}
-      />
-
-      <Sparkles
-        count={500}
-        scale={[10, 5, 10]}
-        size={1.5}
-        speed={2}
-        color={"#4cc9f0"}
-      />
 
       <PlanetLoader isLoading={isLoading} />
 
-      <mesh scale={[4, 4, 4]} position={[0, 1.5, 0]} ref={sphere}>
+      <mesh
+        scale={scalingFactor * 4}
+        position={[0, scalingFactor * 1.5, 0]}
+        ref={sphere}
+      >
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial
           map={texture}

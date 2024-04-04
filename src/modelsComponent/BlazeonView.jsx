@@ -1,4 +1,3 @@
-import { Sparkles } from "@react-three/drei";
 import * as THREE from "three";
 import React, { useMemo, useState, useRef, useEffect } from "react";
 
@@ -10,6 +9,8 @@ import PlanetLoader from "../components/PlanetLoader";
 const BlazeonView = () => {
   const [isLoading, setIsLoading] = useState(true);
   const sphere = useRef(new THREE.Mesh());
+
+  const scalingFactor = Math.min(Math.max(window.innerWidth / 1200, 0.5), 1.01);
 
   useEffect(() => {
     sphere.current.visible = false;
@@ -48,36 +49,26 @@ const BlazeonView = () => {
 
   return (
     <>
-      <CommonViewer />
+      <CommonViewer sparkle={"#fff0f3"} rectAreaLight={"#fb6107"} />
 
       <pointLight position={[3, 0, 3]} intensity={5} color={"#fff0f3"} />
       <pointLight position={[-3, -3, 3]} intensity={5} color={"#fff0f3"} />
-      <rectAreaLight
-        rotation={[Math.PI / 2, 0, 0]}
-        position={[0, -5, -1]}
-        intensity={10}
-        color={"#fff0f3"}
-      />
-
-      <Sparkles
-        count={500}
-        scale={[15, 5, 10]}
-        size={1.5}
-        speed={2}
-        color={"#fff0f3"}
-      />
 
       <PlanetLoader isLoading={isLoading} />
 
-      <mesh scale={[4, 4, 4]} position={[0, 1.5, 0]} ref={sphere}>
+      <mesh
+        scale={scalingFactor * 4}
+        position={[0, scalingFactor * 1.5, 0]}
+        ref={sphere}
+      >
         <sphereGeometry args={[1, 32, 32]} />
         {/* you can play around here */}
         <meshStandardMaterial
           map={texture}
           normalMap={normal}
           normalScale={0.1}
-          // displacementMap={displacement}
-          // displacementScale={0.01}
+          displacementMap={displacement}
+          displacementScale={0.01}
           aoMap={aomap}
           aoMapIntensity={0.5}
           roughness={0}

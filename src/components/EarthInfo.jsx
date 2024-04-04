@@ -2,8 +2,8 @@ import React from "react";
 
 const EarthInfo = () => {
   return (
-    <div className="w-[40vw]">
-      <div className="flex gap-16 my-20 flex-wrap">
+    <div className="lg:w-[40vw]">
+      <div className="flex justify-center gap-16 my-20 flex-wrap">
         <div className="w-52 h-full flexCenter flex-col gap-1">
           <p className="info-sub-text">Diameters</p>
           <p className="font-sans text-3xl font-bold">12,742 km</p>
@@ -12,7 +12,7 @@ const EarthInfo = () => {
           <p className="info-sub-text">Gravity</p>
           <p className="font-sans text-3xl font-bold">0.376 g</p>
         </div>
-        <div className="w-52 h-full flexCenter flex-col gap-1">
+        <div className="w-52 h-full flexCenter flex-col gap-1 mb-96 md:m-0">
           <p className="info-sub-text">Surface Area</p>
           <p className="font-sans text-3xl font-bold">510.1M Sm</p>
         </div>

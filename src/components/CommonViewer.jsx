@@ -1,11 +1,9 @@
-import { OrbitControls } from "@react-three/drei";
-import { Perf } from "r3f-perf";
+import { OrbitControls, Sparkles } from "@react-three/drei";
 import React from "react";
 
-const CommonViewer = () => {
+const CommonViewer = ({ sparkle, rectAreaLight }) => {
   return (
     <>
-      <Perf position={"bottom-right"} />
       <OrbitControls
         enableZoom={false}
         rotateSpeed={0.2}
@@ -16,6 +14,19 @@ const CommonViewer = () => {
         enablePan={false}
       />
       <ambientLight intensity={0.5} />
+      <Sparkles
+        count={500}
+        scale={[15, 5, 10]}
+        size={1.5}
+        speed={2}
+        color={sparkle}
+      />
+      <rectAreaLight
+        rotation={[Math.PI / 2, 0, 0]}
+        position={[0, -5, -1]}
+        intensity={10}
+        color={rectAreaLight}
+      />
     </>
   );
 };

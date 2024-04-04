@@ -77,9 +77,13 @@ import esImg from "../assets/imgs/textures/HeroEarth/es.jpg";
 import ecImg from "../assets/imgs/textures/HeroEarth/ec.png";
 import enImg from "../assets/imgs/textures/HeroEarth/en.jpg";
 
-import sunImg from "../assets/imgs/textures/earth/sun.jpeg";
+import sunImg from "../assets/imgs/textures/sun/sun.jpeg";
 
-import loaderGif from "../assets/vds/loader.gif";
+import marImg from "../assets/imgs/textures/Mars/mar.webp";
+import marnImg from "../assets/imgs/textures/Mars/marn.jpg";
+import marbImg from "../assets/imgs/textures/Mars/marb.jpg";
+
+import loaderGif from "../assets/vds/loadingPlanet.gif";
 
 // videos
 import earthMp4 from "../assets/vds/earth.mp4";
@@ -158,6 +162,10 @@ export const ia = iaImg;
 export const ir = irImg;
 
 export const sun = sunImg;
+
+export const mar = marImg;
+export const marn = marnImg;
+export const marb = marbImg;
 
 export const em = emImg;
 export const eb = ebImg;
