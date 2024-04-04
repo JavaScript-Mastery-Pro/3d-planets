@@ -1,11 +1,11 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Canvas } from "@react-three/fiber";
 
 // Internal imports
 import { fictionalPlanetCardLists } from "../constants";
 import { arrowImg } from "../utils";
-import SmallPlanetsViewer from "../modelsComponent/SmallPlanetsViewer";
+import SmallPlanetsViewer from "../PlanetsComponents/SmallPlanetsViewer";
 
 const CardsContainer = ({ restrict }) => {
   const nav = useNavigate();
@@ -25,30 +25,19 @@ const CardsContainer = ({ restrict }) => {
   }, []);
 
   return (
-    <div className="flexCenter gap-0 md:gap-14 flex-wrap mt-28">
+    <div className="flex-center gap-0 md:gap-14 flex-wrap mt-28">
       {array.map((list) => (
         <div className={`w-96 h-96`} key={list.id}>
           <div className="relative h-full bg-rectangle-card-bg bg-no-repeat bg-center bg-contain">
             <div className="w-60 h-60 absolute z-50 -top-14 -left-14">
-              <Canvas className="">
-                <Suspense
-                  fallback={() => {
-                    return (
-                      <mesh>
-                        <boxGeometry args={[1, 1, 1]} />
-                        <meshStandardMaterial color={"#f8f9fa"} />
-                      </mesh>
-                    );
-                  }}
-                >
-                  <SmallPlanetsViewer tex={list.map} />
-                </Suspense>
+              <Canvas>
+                <SmallPlanetsViewer tex={list.map} />
               </Canvas>
             </div>
             <img
               src={arrowImg}
               alt="arrow"
-              className="absolute right-5 md:right-16 top-16 cursor-pointer z-10 hover:border border-[#e0fbfc50] rounded-full transition-all"
+              className="arrow"
               onClick={() => handleClick(list.id)}
             />
 

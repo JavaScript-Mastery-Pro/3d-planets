@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 import Nav from "../components/Nav";
 import HeroOverLay from "./HeroOverLay";
 import EarthDetail from "./EarthDetail";
-import EarthView from "../modelsComponent/EarthView";
+import EarthView from "../PlanetsComponents/EarthView";
 import CardsContainer from "../components/CardsContainer";
 import EarthInfo from "../components/EarthInfo";
 

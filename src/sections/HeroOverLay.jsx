@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "../components/Button";
 
 const HeroOverLay = () => {
   return (
@@ -6,14 +7,12 @@ const HeroOverLay = () => {
       <p className="font-sans text-center tracking-[1rem] text-lg mt-32 md:mt-24 mb-8">
         PLANET
       </p>
-      <h1 className="font-sans text-8xl font-bold">Earth</h1>
-      <div className="w-28 h-2 rounded-lg bg-skyBlue"></div>
+      <h1 className="earth-title">Earth</h1>
+      <div className="underline-div-div"></div>
       <p className="sub-text text-lg my-10 tracking-wide text-center">
         Earth: A vibrant planet rich in life and natural beauty. Our home.
       </p>
-      <div className="w-48 h-14 rounded-full bg-primary flexCenter ">
-        <p className="text-black font-semibold">LEARN MORE</p>
-      </div>
+      <Button text="LEARN MORE" />
     </div>
   );
 };

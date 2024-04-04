@@ -1,25 +1,44 @@
-import {
-  earthImg,
-  earthVd,
-  fm,
-  im,
-  jm,
-  lm,
-  marsImg,
-  mc,
-  mercuryImg,
-  mm,
-  ndr,
-  ndm,
-  sm,
-} from "../utils";
-import BlazeonView from "../modelsComponent/BlazeonView";
-import AuroraView from "../modelsComponent/AuroraView";
-import ZephyrionView from "../modelsComponent/ZephyrionView";
-import NebulonView from "../modelsComponent/NebulonView";
-import VerdantiaView from "../modelsComponent/VerdantiaView";
-import SpectraView from "../modelsComponent/SpectraView";
-import IgnisMajorView from "../modelsComponent/IgnisMajorView";
+import { earthVd, fm, im, jm, lm, mm, ndm, sm } from "../utils";
+import BlazeonView from "../PlanetsComponents/BlazeonView";
+import AuroraView from "../PlanetsComponents/AuroraView";
+import ZephyrionView from "../PlanetsComponents/ZephyrionView";
+import NebulonView from "../PlanetsComponents/NebulonView";
+import VerdantiaView from "../PlanetsComponents/VerdantiaView";
+import SpectraView from "../PlanetsComponents/SpectraView";
+import IgnisMajorView from "../PlanetsComponents/IgnisMajorView";
+
+export const earthInfo = [
+  {
+    id: 1,
+    title: "Diameters",
+    number: "12,742 km",
+  },
+  {
+    id: 2,
+    title: "Gravity",
+    number: "0.376 g",
+  },
+  {
+    id: 3,
+    title: "Surface Area",
+    number: "510.1M Sm",
+  },
+  {
+    id: 4,
+    title: "Orbit Period",
+    number: "365 days",
+  },
+  {
+    id: 5,
+    title: "Mean Radius",
+    number: "6,371 Km",
+  },
+  {
+    id: 6,
+    title: "Rotation Period",
+    number: "24 hrs",
+  },
+];
 
 export const fictionalPlanetCardLists = [
   {
@@ -28,8 +47,6 @@ export const fictionalPlanetCardLists = [
     subtitle: "The 1st Planet",
     km: "8,945 km",
     g: "0.376 g",
-    img: mercuryImg,
-    path: "../assets/imgs/Mercury.svg",
     map: fm,
   },
   {
@@ -38,8 +55,6 @@ export const fictionalPlanetCardLists = [
     subtitle: "The 3rd Planet",
     km: "3,390 km",
     g: "0.546 g",
-    img: mc,
-    path: "../assets/imgs/Earth.svg",
     map: mm,
   },
   {
@@ -48,8 +63,6 @@ export const fictionalPlanetCardLists = [
     subtitle: "The 4th Planet",
     km: "4,540 km",
     g: "0.386 g",
-    img: marsImg,
-    path: "../assets/imgs/Mars.svg",
     map: jm,
   },
   {
@@ -58,8 +71,6 @@ export const fictionalPlanetCardLists = [
     subtitle: "The 5th Planet",
     km: "6,540 km",
     g: "0.546 g",
-    img: earthImg,
-    path: "../assets/imgs/Mars.svg",
     map: im,
   },
   {
@@ -68,8 +79,6 @@ export const fictionalPlanetCardLists = [
     subtitle: "The 2nd Planet",
     km: "3,540 km",
     g: "0.345 g",
-    img: marsImg,
-    path: "../assets/imgs/Mars.svg",
     map: lm,
   },
   {
@@ -78,8 +87,6 @@ export const fictionalPlanetCardLists = [
     subtitle: "The 7th Planet",
     km: "4,765 km",
     g: "0.987 g",
-    img: marsImg,
-    path: "../assets/imgs/Mars.svg",
     map: sm,
   },
   {
@@ -88,8 +95,6 @@ export const fictionalPlanetCardLists = [
     subtitle: "The 6th Planet",
     km: "4,540 km",
     g: "0.386 g",
-    img: marsImg,
-    path: "../assets/imgs/Mars.svg",
     map: ndm,
   },
 ];

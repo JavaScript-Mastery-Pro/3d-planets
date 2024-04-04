@@ -32,9 +32,7 @@ const Nav = ({ border, isBack }) => {
           <img src={backImg} alt="back arrow" />
           <p
             className={`sub-text ms-2 transition-all ${
-              isBack
-                ? "text-primary hover:text-secondary"
-                : "text-secondary hover:text-primary"
+              isBack ? "nav-hover-text-isBack" : "nav-hover-text-notBack"
             }`}
             onClick={handleBack}
           >
@@ -48,9 +46,7 @@ const Nav = ({ border, isBack }) => {
       <div className="flex gap-10">
         <p
           className={`nav-text ${
-            isBack
-              ? "text-primary hover:text-secondary"
-              : "text-secondary hover:text-primary"
+            isBack ? "nav-hover-text-isBack" : "nav-hover-text-notBack"
           }`}
           onClick={handleHome}
         >
@@ -58,9 +54,7 @@ const Nav = ({ border, isBack }) => {
         </p>
         <p
           className={`nav-text ${
-            isBack
-              ? "text-primary hover:text-secondary"
-              : "text-secondary hover:text-primary"
+            isBack ? "nav-hover-text-isBack" : "nav-hover-text-notBack"
           }`}
           onClick={handlePlanet}
         >

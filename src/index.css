@@ -29,99 +29,43 @@ body {
   font-family: "Manrope", sans-serif;
 }
 
-/* 2d implement */
-.box {
-  /* display: flex; */
-  height: 100%;
-  width: 100%;
-  /* justify-content: center; */
-  /* align-items: center; */
-  /* perspective: 1500px; */
-  /* overflow: hidden; */
-  /* border: 1px solid purple; */
-}
-.orbit {
-  width: calc(100% - 100px);
-  aspect-ratio: 1;
-  /* height: 500px; */
-  /* border: 1px solid white; */
-  position: relative;
-  border-radius: 50%;
-  transform: rotateX(70deg);
-  transition: 2s;
-}
-
-.obj {
-  width: 200px;
-  height: 500px;
-  /* background-color: red; */
-  position: absolute;
-  /* border-radius: 50%; */
-}
-
-.obj-3 {
-  /* width: 0vw;
-  height: 0vh; */
-  /* border: 1px solid red; */
-  /* background-color: red; */
-  width: 500px;
-  height: 200px;
-  left: 0;
-  right: 0;
-  margin: auto;
-  transform: translateY(-50%);
-}
-.obj-2 {
-  /* width: 50vw; */
-  /* height: 100vh; */
-  /* border: 1px solid green; */
-  /* background-color: green; */
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  transform: translateX(50%);
-}
-.obj-1 {
-  width: 50vw;
-  height: 250vh;
-  /* border: 1px solid blue; */
-  /* background-color: blue; */
-  right: 0;
-  left: 0;
-  bottom: 0;
-  margin: auto;
-  transform: translateY(65%);
-}
-.obj-4 {
-  /* width: 50vw; */
-  /* height: 100vh; */
-  /* border: 1px solid orange; */
-  /* background-color: orange; */
-
-  left: 0;
-  bottom: 0;
-  top: 0;
-  margin: auto;
-  transform: translateX(-50%);
-}
-
 /* components */
 @layer components {
   .sub-text {
     @apply font-serif text-secondary;
   }
   /* kebab-case - stick to the kebab-case */
-  .flexCenter {
+  .flex-center {
     @apply flex justify-center items-center;
   }
   .detail-sub-text {
-    @apply sub-text text-lg w-full text-center text-primary;
+    @apply sub-text text-lg w-full text-center text-primary md:text-start md:w-[50vw];
   }
   .info-sub-text {
     @apply tracking-widest text-secondary text-lg uppercase;
   }
   .nav-text {
     @apply sub-text cursor-pointer transition-all;
+  }
+  .nav-hover-text-isBack {
+    @apply text-primary hover:text-secondary;
+  }
+  .nav-hover-text-notBack {
+    @apply text-secondary hover:text-primary;
+  }
+  .info-text {
+    @apply w-52 h-full flex-center flex-col gap-1;
+  }
+  .info-number {
+    @apply font-sans text-3xl font-bold;
+  }
+  .arrow {
+    @apply absolute right-5 md:right-16 top-16 cursor-pointer z-10 hover:border border-[#e0fbfc50] rounded-full transition-all;
+  }
+  .earth-title {
+    @apply font-sans text-8xl font-bold;
+  }
+  .underline-div-div {
+    @apply w-28 h-2 rounded-lg bg-skyBlue;
   }
 }
