@@ -9,7 +9,7 @@ const HeroOverLay = () => {
       </p>
       <h1 className="earth-title">Earth</h1>
       <div className="underline-div-div"></div>
-      <p className="sub-text text-lg my-10 tracking-wide text-center">
+      <p className="sub-text text-lg mt-10 tracking-wide text-center">
         Earth: A vibrant planet rich in life and natural beauty. Our home.
       </p>
       <Button text="LEARN MORE" />
