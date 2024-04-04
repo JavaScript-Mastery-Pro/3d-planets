@@ -6,6 +6,7 @@ import { Canvas } from "@react-three/fiber";
 import Nav from "../components/Nav";
 import { fictionalPlanetDetailsLists } from "../constants";
 import Button from "../components/Button";
+import ScrollToTop from "../components/ScrollToTop";
 
 let mobile = window.innerWidth < 768;
 
@@ -35,6 +36,7 @@ const PlanetDetail = () => {
         backgroundColor: `${color}`,
       }}
     >
+      <ScrollToTop />
       {/* nav bar */}
       <Nav border={false} isBack={true} />
 
