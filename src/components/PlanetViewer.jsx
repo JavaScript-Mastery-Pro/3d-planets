@@ -1,20 +1,33 @@
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
-import React, { useMemo, useState, useRef, useEffect } from "react";
 
-// Internal imports
-import { fa, fd, fm, fn } from "../utils";
-import CommonViewer from "../components/CommonViewer";
-import PlanetLoader from "../components/PlanetLoader";
+import CommonViewer from "./CommonViewer";
+import PlanetLoader from "./PlanetLoader";
 
-const BlazeonView = () => {
+const PlanetViewer = ({
+  txt,
+  nor,
+  dis,
+  ao,
+  rou,
+  sparkle,
+  rect,
+  p1,
+  p2,
+  roughnessScale,
+  normalScale,
+  displacementScale,
+  aoMapIntensity,
+}) => {
   const [isLoading, setIsLoading] = useState(true);
   const sphere = useRef(new THREE.Mesh());
 
-  const scalingFactor = Math.min(Math.max(window.innerWidth / 1200, 0.5), 1.01);
+  const scalingFactor = Math.min(Math.max(window.innerWidth / 1500, 0.5), 0.97);
 
   useEffect(() => {
     sphere.current.visible = false;
-  }, [fa, fd, fm, fn]);
+    console.log(rou);
+  }, [txt, nor, dis, ao, rou]);
 
   const manager = new THREE.LoadingManager();
   manager.onLoad = function () {
@@ -22,10 +35,11 @@ const BlazeonView = () => {
     sphere.current.visible = true;
   };
 
-  const texture = new THREE.TextureLoader(manager).load(fm);
-  const normal = new THREE.TextureLoader(manager).load(fn);
-  const displacement = new THREE.TextureLoader(manager).load(fa);
-  const aomap = new THREE.TextureLoader(manager).load(fd);
+  const texture = new THREE.TextureLoader(manager).load(txt);
+  const normal = new THREE.TextureLoader(manager).load(nor);
+  const displacement = new THREE.TextureLoader(manager).load(ao);
+  const aomap = new THREE.TextureLoader(manager).load(dis);
+  const roughness = new THREE.TextureLoader(manager).load(rou);
 
   useMemo(() => {
     texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
@@ -47,14 +61,15 @@ const BlazeonView = () => {
     aomap.repeat.setScalar(4);
   }, [aomap]);
 
+  useMemo(() => {
+    if (rou === null) return;
+    roughness.wrapS = roughness.wrapT = THREE.RepeatWrapping;
+    roughness.repeat.setScalar(4);
+  }, [roughness]);
+
   return (
     <>
-      <CommonViewer
-        sparkle={"#fff0f3"}
-        rectAreaLight={"#fb6107"}
-        p1={"#fff0f3"}
-        p2={"#fff0f3"}
-      />
+      <CommonViewer sparkle={sparkle} rectAreaLight={rect} p1={p1} p2={p2} />
 
       <PlanetLoader isLoading={isLoading} />
 
@@ -68,16 +83,17 @@ const BlazeonView = () => {
         <meshStandardMaterial
           map={texture}
           normalMap={normal}
-          normalScale={0.1}
+          normalScale={normalScale}
           displacementMap={displacement}
-          displacementScale={0.01}
+          displacementScale={displacementScale}
           aoMap={aomap}
-          aoMapIntensity={0.5}
-          roughness={0}
+          aoMapIntensity={aoMapIntensity}
+          roughnessMap={roughness}
+          roughness={roughnessScale}
         />
       </mesh>
     </>
   );
 };
 
-export default BlazeonView;
+export default PlanetViewer;

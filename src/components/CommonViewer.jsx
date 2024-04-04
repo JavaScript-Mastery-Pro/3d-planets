@@ -1,7 +1,7 @@
 import { OrbitControls, Sparkles } from "@react-three/drei";
 import React from "react";
 
-const CommonViewer = ({ sparkle, rectAreaLight }) => {
+const CommonViewer = ({ sparkle, rectAreaLight, p1, p2 }) => {
   return (
     <>
       <OrbitControls
@@ -13,7 +13,7 @@ const CommonViewer = ({ sparkle, rectAreaLight }) => {
         minPolarAngle={Math.PI / 2}
         enablePan={false}
       />
-      <ambientLight intensity={0.5} />
+      <ambientLight intensity={0.2} />
       <Sparkles
         count={500}
         scale={[15, 5, 10]}
@@ -27,6 +27,8 @@ const CommonViewer = ({ sparkle, rectAreaLight }) => {
         intensity={10}
         color={rectAreaLight}
       />
+      <pointLight position={[3, -3, 3]} intensity={5} color={p1} />
+      <pointLight position={[-3, -3, 3]} intensity={5} color={p2} />
     </>
   );
 };

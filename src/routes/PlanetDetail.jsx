@@ -7,6 +7,7 @@ import Nav from "../components/Nav";
 import { fictionalPlanetDetailsLists } from "../constants";
 import Button from "../components/Button";
 import ScrollToTop from "../components/ScrollToTop";
+import PlanetViewer from "../components/PlanetViewer";
 
 let mobile = window.innerWidth < 768;
 
@@ -25,8 +26,20 @@ const PlanetDetail = () => {
     gravity,
     area,
     vd,
-    model: Model,
     color,
+    txt,
+    nor,
+    dis,
+    ao,
+    rou,
+    sparkle,
+    rect,
+    p1,
+    p2,
+    roughnessScale,
+    normalScale,
+    displacementScale,
+    aoMapIntensity,
   } = fictionalPlanetDetailsLists.find((planet) => planet.id === Number(id));
 
   return (
@@ -51,7 +64,21 @@ const PlanetDetail = () => {
           transform: "translate(-50%, -15%)",
         }}
       >
-        <Model />
+        <PlanetViewer
+          txt={txt}
+          nor={nor}
+          dis={dis}
+          ao={ao}
+          rou={rou}
+          sparkle={sparkle}
+          rect={rect}
+          p1={p1}
+          p2={p2}
+          roughnessScale={roughnessScale}
+          normalScale={normalScale}
+          displacementScale={displacementScale}
+          aoMapIntensity={aoMapIntensity}
+        />
       </Canvas>
 
       {/* Earth Text */}
