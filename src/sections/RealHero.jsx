@@ -80,7 +80,7 @@ const RealHero = () => {
         <EarthInfo />
       </div>
       <div className="md:my-32">
-        <h1 className="text-lg font-extrabold md:text-5xl text-center font-sans tracking-wider">
+        <h1 className="text-lg font-extrabold md:text-5xl text-center font-orbiton tracking-wider">
           EXPLORE OTHER PLANETS
         </h1>
         <CardsContainer restrict={true} />

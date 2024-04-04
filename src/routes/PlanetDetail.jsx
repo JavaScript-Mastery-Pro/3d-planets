@@ -54,7 +54,7 @@ const PlanetDetail = () => {
 
       {/* Earth Text */}
       <div className="flex flex-col items-center -translate-y-14">
-        <h1 className="font-sans text-4xl md:text-8xl font-bold">{title}</h1>
+        <h1 className="font-orbiton text-4xl md:text-8xl font-bold">{title}</h1>
         <div className="underline-div"></div>
 
         <p className="detail-sub-text mt-10">{des}</p>

@@ -3,7 +3,7 @@ import React from "react";
 const EarthDetail = () => {
   return (
     <div className="w-screen h-screen lg:h-[30vh] lg:w-[35vw]">
-      <p className="font-sans tracking-wide text-lg">PLANET</p>
+      <p className="font-orbiton tracking-wide text-lg">PLANET</p>
       <h1 className="earth-title">Earth</h1>
       <div className="underline-div"></div>
       <p className="sub-text text-lg mb-5 mt-10 tracking-wide ">

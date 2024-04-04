@@ -40,7 +40,7 @@ const Nav = ({ border, isBack }) => {
           </p>
         </div>
       ) : (
-        <h1 className="font-sans font-semibold text-xl">SpaceSystem</h1>
+        <h1 className="font-orbiton font-semibold text-xl">SpaceSystem</h1>
       )}
 
       <div className="flex gap-10">

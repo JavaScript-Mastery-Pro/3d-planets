@@ -14,8 +14,8 @@ export default {
         "rectangle-card-bg": "url('/src/assets/imgs/rectangle.svg')",
       },
       fontFamily: {
-        sans: ['"Orbitron", sans-serif'], // use Orbiton as a name
-        serif: ['"Manrope", sans-serif'],
+        orbiton: ['"Orbitron", sans-serif'], 
+        manrope: ['"Manrope", sans-serif'],
       },
     },
   },

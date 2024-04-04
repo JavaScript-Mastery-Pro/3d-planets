@@ -32,7 +32,7 @@ body {
 /* components */
 @layer components {
   .sub-text {
-    @apply font-serif text-secondary;
+    @apply font-manrope text-secondary;
   }
   /* kebab-case - stick to the kebab-case */
   .flex-center {
@@ -57,13 +57,13 @@ body {
     @apply w-52 h-full flex-center flex-col gap-1;
   }
   .info-number {
-    @apply font-sans text-3xl font-bold;
+    @apply font-orbiton text-3xl font-bold;
   }
   .arrow {
     @apply absolute right-5 md:right-16 top-16 cursor-pointer z-10 hover:border border-[#e0fbfc50] rounded-full transition-all;
   }
   .earth-title {
-    @apply font-sans text-8xl font-bold;
+    @apply font-orbiton text-8xl font-bold;
   }
   .underline-div-div {
     @apply w-28 h-2 rounded-lg bg-skyBlue;

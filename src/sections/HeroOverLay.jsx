@@ -4,7 +4,7 @@ import Button from "../components/Button";
 const HeroOverLay = () => {
   return (
     <div className="h-screen relative flex flex-col items-center">
-      <p className="font-sans text-center tracking-[1rem] text-lg mt-32 md:mt-24 mb-8">
+      <p className="font-orbiton text-center tracking-[1rem] text-lg mt-32 md:mt-24 mb-8">
         PLANET
       </p>
       <h1 className="earth-title">Earth</h1>

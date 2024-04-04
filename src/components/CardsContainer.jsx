@@ -43,17 +43,17 @@ const CardsContainer = ({ restrict }) => {
 
             {/* info texts */}
             <div className="flex flex-col h-full justify-end">
-              <p className="text-center font-sans font-semibold text-3xl">
+              <p className="text-center font-orbiton font-semibold text-3xl">
                 {list.title}
               </p>
               <p className="text-center sub-text mb-10">{list.subtitle}</p>
               <div className="flex justify-center gap-10 mb-24">
                 <span>
-                  <p className="font-sans text-center">{list.km}</p>
+                  <p className="font-orbiton text-center">{list.km}</p>
                   <p className="sub-text text-center">Radius</p>
                 </span>
                 <span>
-                  <p className="font-sans text-center">{list.g}</p>
+                  <p className="font-orbiton text-center">{list.g}</p>
                   <p className="sub-text text-center">Gravity</p>
                 </span>
               </div>
