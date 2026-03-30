@@ -2,32 +2,25 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Canvas } from "@react-three/fiber";
 
-// Interal imports
-import Nav from "../components/Nav";
-import { fictionalPlanetDetailsLists } from "../constants";
-import Button from "../components/Button";
-import ScrollToTop from "../components/ScrollToTop";
+// Internal imports
+import Nav from "@/components/sections/Nav";
+import { fictionalPlanetDetailsLists, PLANET_STAT_FIELDS, MOBILE_BREAKPOINT } from "@c";
+import Button from "@/components/sections/Button";
+import ScrollToTop from "@/components/sections/ScrollToTop";
+import PlanetStatRow from "@/components/sections/PlanetStatRow";
 
-let mobile = window.innerWidth < 768;
+const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
 
 const PlanetDetail = () => {
   const { id } = useParams();
 
-  const back = useNavigate();
+  const navigate = useNavigate();
   const handleBack = () => {
-    back("/planets");
+    navigate("/planets");
   };
 
-  const {
-    title,
-    des,
-    diameter,
-    gravity,
-    area,
-    vd,
-    model: Model,
-    color,
-  } = fictionalPlanetDetailsLists.find((planet) => planet.id === Number(id));
+  const planet = fictionalPlanetDetailsLists.find((p) => p.id === Number(id));
+  const { title, des, video, model: Model, color } = planet;
 
   return (
     <div
@@ -40,13 +33,13 @@ const PlanetDetail = () => {
       {/* nav bar */}
       <Nav border={false} isBack={true} />
 
-      {/* canvas for the planets */}
+      {/* Planet 3D canvas */}
       <Canvas
         style={{
-          width: mobile ? "80vw" : "100vw",
-          height: mobile ? "50vh" : "60vh",
+          width: isMobile ? "80vw" : "100vw",
+          height: isMobile ? "50vh" : "60vh",
           position: "relative",
-          top: mobile ? "10vh" : 0,
+          top: isMobile ? "10vh" : 0,
           left: "50%",
           transform: "translate(-50%, -15%)",
         }}
@@ -57,25 +50,20 @@ const PlanetDetail = () => {
       {/* Earth Text */}
       <div className="flex flex-col items-center -translate-y-14">
         <h1 className="font-orbiton text-4xl md:text-8xl font-bold">{title}</h1>
-        <div className="underline-div"></div>
+        <div className="underline-div-div"></div>
 
         <p className="detail-sub-text mt-10">{des}</p>
 
         <Button text="SCROLL DOWN" />
 
         <div className="flex flex-col md:flex-row gap-16 my-20">
-          <div className="info-text">
-            <p className="info-sub-text">Diameters</p>
-            <p className="info-number">{diameter} km</p>
-          </div>
-          <div className="info-text">
-            <p className="info-sub-text">Gravity</p>
-            <p className="info-number">{gravity} g</p>
-          </div>
-          <div className="info-text">
-            <p className="info-sub-text">Surface Area</p>
-            <p className="info-number">{area}M SM</p>
-          </div>
+          {PLANET_STAT_FIELDS.map((stat) => (
+            <PlanetStatRow
+              key={stat.key}
+              label={stat.label}
+              value={`${planet[stat.key]} ${stat.unit}`}
+            />
+          ))}
         </div>
 
         <p className="detail-sub-text mb-8 ">
@@ -96,8 +84,9 @@ const PlanetDetail = () => {
           is home to over 7.9 billion people and various ecosystems.
         </p>
 
+        {/* Planet video */}
         <video
-          src={vd}
+          src={video}
           autoPlay
           muted
           loop

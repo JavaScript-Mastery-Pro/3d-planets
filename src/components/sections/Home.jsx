@@ -1,5 +1,5 @@
 import React from "react";
-import RealHero from "./RealHero";
+import RealHero from "@/components/sections/RealHero";
 
 const Home = () => {
   return (

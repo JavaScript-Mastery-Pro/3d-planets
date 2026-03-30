@@ -1,18 +1,18 @@
 import React from "react";
-import { earthInfo } from "../constants";
+import { earthInfo } from "@c";
+import PlanetStatRow from "@/components/sections/PlanetStatRow";
 
 const EarthInfo = () => {
   return (
     <div className="lg:w-[40vw]">
       <div className="flex justify-center gap-16 my-20 flex-wrap">
         {earthInfo.map((info) => (
-          <div
-            className={`info-text ${info.id === 3 && "mb-96 md:m-0"}`}
+          <PlanetStatRow
             key={info.id}
-          >
-            <p className="info-sub-text">{info.title}</p>
-            <p className="info-number">{info.number}</p>
-          </div>
+            label={info.title}
+            value={info.number}
+            className={info.id === 3 ? "mb-96 md:m-0" : ""}
+          />
         ))}
       </div>
     </div>

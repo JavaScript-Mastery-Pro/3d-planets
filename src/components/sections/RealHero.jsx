@@ -6,16 +6,19 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 // Import internals
-import Nav from "../components/Nav";
-import HeroOverLay from "./HeroOverLay";
-import EarthDetail from "./EarthDetail";
-import EarthView from "../PlanetsComponents/EarthView";
-import CardsContainer from "../components/CardsContainer";
-import EarthInfo from "../components/EarthInfo";
+import Nav from "@/components/sections/Nav";
+import HeroOverLay from "@/components/sections/HeroOverLay";
+import EarthDetail from "@/components/sections/EarthDetail";
+import EarthView from "@/components/models/EarthView";
+import CardsContainer from "@/components/sections/CardsContainer";
+import EarthInfo from "@/components/sections/EarthInfo";
 
-let mobile = window.innerWidth < 768;
+import { MOBILE_BREAKPOINT } from "@c";
+
+const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
 
 const RealHero = () => {
+  // Animate Earth view position on scroll
   useEffect(() => {
     gsap.to(".view", {
       scrollTrigger: {
@@ -25,8 +28,8 @@ const RealHero = () => {
         end: "bottom bottom",
         // markers: true,
       },
-      top: mobile ? "130%" : "110%",
-      left: mobile ? "0%" : "45%",
+      top: isMobile ? "130%" : "110%",
+      left: isMobile ? "0%" : "45%",
       transform: "translateX(0%)  ",
       duration: 5,
       ease: "power1.out",
@@ -42,8 +45,8 @@ const RealHero = () => {
           end: "bottom 110%",
           // markers: true,
         },
-        top: mobile ? "225%" : "205%",
-        left: mobile ? "0%" : "5%",
+        top: isMobile ? "225%" : "205%",
+        left: isMobile ? "0%" : "5%",
         transform: "translateX(0%)",
         duration: 10,
         ease: "power1.in",

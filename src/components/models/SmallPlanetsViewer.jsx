@@ -1,22 +1,14 @@
 import { OrbitControls } from "@react-three/drei";
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import * as THREE from "three";
+
 // Internal imports
-import PlanetLoader from "../components/PlanetLoader";
+import { SCENE, PLANET_SCALE, SPHERE_GEOMETRY } from "@c";
+import PlanetLoader from "@/components/sections/PlanetLoader";
+import { usePlanetLoader } from "@/hooks/usePlanetLoader";
 
 const SmallPlanetsViewer = ({ tex }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const sphere = useRef(new THREE.Mesh());
-
-  useEffect(() => {
-    sphere.current.visible = false;
-  }, [tex]);
-
-  const manager = new THREE.LoadingManager();
-  manager.onLoad = function () {
-    setIsLoading(false);
-    sphere.current.visible = true;
-  };
+  const { isLoading, meshRef, manager } = usePlanetLoader([tex]);
 
   const texture = new THREE.TextureLoader(manager).load(tex);
 
@@ -24,9 +16,9 @@ const SmallPlanetsViewer = ({ tex }) => {
     <>
       <OrbitControls
         enableZoom={false}
-        rotateSpeed={0.2}
+        rotateSpeed={SCENE.ORBIT_ROTATE_SPEED}
         autoRotate
-        autoRotateSpeed={0.2}
+        autoRotateSpeed={SCENE.ORBIT_AUTO_ROTATE_SPEED}
         maxPolarAngle={Math.PI / 2}
         minPolarAngle={Math.PI / 2}
         enablePan={false}
@@ -42,8 +34,8 @@ const SmallPlanetsViewer = ({ tex }) => {
 
       <PlanetLoader isLoading={isLoading} />
 
-      <mesh scale={[2.25, 2.25, 2.25]} ref={sphere}>
-        <sphereGeometry args={[1, 16, 16]} />
+      <mesh scale={[PLANET_SCALE.SMALL, PLANET_SCALE.SMALL, PLANET_SCALE.SMALL]} ref={meshRef}>
+        <sphereGeometry args={SPHERE_GEOMETRY.SMALL} />
         <meshStandardMaterial map={texture} />
       </mesh>
     </>

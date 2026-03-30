@@ -1,32 +1,47 @@
 /* fonts import */
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Orbitron:wght@400..900&display=swap");
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* font-family: "Manrope", sans-serif; */
-/* font-family: "Orbitron", sans-serif;  */
+@theme {
+  --color-primary: #ffffff;
+  --color-secondary: #D3E7FF;
+  --color-dim: #2C3148;
+  --color-skyBlue: #74C8FF;
 
-:root {
-  --dark-bg: #0a1824;
-  --dark: #1a1a1a;
+  --font-orbiton: "Orbitron", sans-serif;
+  --font-manrope: "Manrope", sans-serif;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@utility bg-planet-card-bg {
+  background-image: url('/src/assets/imgs/planet-card-bg.png');
 }
 
-body {
-  color: white;
-  width: 100%;
-  overflow-x: hidden;
-  overscroll-behavior-y: none;
-  height: 100%;
-  user-select: none;
-  font-family: "Manrope", sans-serif;
+@utility bg-rectangle-card-bg {
+  background-image: url('/src/assets/imgs/rectangle.svg');
+}
+
+@layer base {
+  :root {
+    --dark-bg: #0a1824;
+    --dark: #1a1a1a;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    color: white;
+    width: 100%;
+    overflow-x: hidden;
+    overscroll-behavior-y: none;
+    height: 100%;
+    user-select: none;
+    font-family: "Manrope", sans-serif;
+  }
 }
 
 /* components */
@@ -34,18 +49,17 @@ body {
   .sub-text {
     @apply font-manrope text-secondary;
   }
-  /* kebab-case - stick to the kebab-case */
   .flex-center {
     @apply flex justify-center items-center;
   }
   .detail-sub-text {
-    @apply sub-text text-lg w-full text-center text-primary md:text-start md:w-[50vw];
+    @apply font-manrope text-lg w-full text-center text-primary md:text-start md:w-[50vw];
   }
   .info-sub-text {
     @apply tracking-widest text-secondary text-lg uppercase;
   }
   .nav-text {
-    @apply sub-text cursor-pointer transition-all;
+    @apply font-manrope text-secondary cursor-pointer transition-all;
   }
   .nav-hover-text-isBack {
     @apply text-primary hover:text-secondary;
@@ -54,7 +68,7 @@ body {
     @apply text-secondary hover:text-primary;
   }
   .info-text {
-    @apply w-52 h-full flex-center flex-col gap-1;
+    @apply w-52 h-full flex justify-center items-center flex-col gap-1;
   }
   .info-number {
     @apply font-orbiton text-3xl font-bold;

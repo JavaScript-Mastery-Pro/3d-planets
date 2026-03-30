@@ -1,6 +1,6 @@
 import React from "react";
-import Nav from "../components/Nav";
-import CardsContainer from "../components/CardsContainer";
+import Nav from "@/components/sections/Nav";
+import CardsContainer from "@/components/sections/CardsContainer";
 
 const PlanetLists = () => {
   return (

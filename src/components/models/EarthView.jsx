@@ -4,53 +4,39 @@ import {
   Sparkles,
   View,
 } from "@react-three/drei";
-import React, { useState, useMemo, useEffect, useRef } from "react";
+import React, { useMemo, useRef } from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 
 // Internal imports
-import { eb, ec, em, en, es } from "../utils";
-import PLanetLoader from "../components/PlanetLoader";
-let mobile = window.innerWidth < 768; // let know the mobile device
+import { earthBump, earthCloud, earthMap, earthNormal, earthSpec, SCENE, PLANET_SCALE, PLANET_OFFSET_Y, SPHERE_GEOMETRY, CLOUD_ROTATION_SPEED, MOBILE_BREAKPOINT } from "@c";
+import PLanetLoader from "@/components/sections/PlanetLoader";
+import { usePlanetLoader } from "@/hooks/usePlanetLoader";
+
+const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
 
 const EarthView = ({ view }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const earthMesh = useRef(new THREE.Mesh()); // the earth sphere
-  const cloudMesh = useRef(new THREE.Mesh()); // the cloud sphere
+  const { isLoading, meshRef: earthMesh, manager } = usePlanetLoader([earthSpec, earthBump, earthCloud, earthMap, earthNormal]);
+  const cloudMesh = useRef(new THREE.Mesh());
 
-  const scalingFactor = Math.min(Math.max(window.innerWidth / 1200, 0.5), 1.01); // auto scale accordingly to the screen size
+  const scalingFactor = Math.min(Math.max(window.innerWidth / SCENE.REFERENCE_WIDTH, SCENE.MIN_SCALE_FACTOR), SCENE.MAX_SCALE_FACTOR);
 
-  useEffect(() => {
-    earthMesh.current.visible = false; // hide the earth sphere
-  }, [es, eb, ec, em, en]);
+  // Load Earth textures
+  const texture = new THREE.TextureLoader(manager).load(earthMap);
+  const normal = new THREE.TextureLoader(manager).load(earthNormal);
+  const bump = new THREE.TextureLoader(manager).load(earthBump);
+  const cloud = new THREE.TextureLoader(manager).load(earthCloud);
+  const spec = new THREE.TextureLoader(manager).load(earthSpec);
 
-  // https://threejs.org/docs/#api/en/loaders/managers/LoadingManager
-  // we will use the loading manager to know when the textures are loaded
-  const manager = new THREE.LoadingManager();
-  manager.onLoad = function () {
-    setIsLoading(false);
-    earthMesh.current.visible = true;
-  };
-
-  // load the textures
-  // https://threejs.org/docs/?q=texture#api/en/loaders/TextureLoader
-  // we will use the texture loader to load the textures, and we will use the manager to know when the textures are loaded
-  // this has more control than the useTexture hook from drei
-  const texture = new THREE.TextureLoader(manager).load(em);
-  const normal = new THREE.TextureLoader(manager).load(en);
-  const bump = new THREE.TextureLoader(manager).load(eb);
-  const cloud = new THREE.TextureLoader(manager).load(ec);
-  const spec = new THREE.TextureLoader(manager).load(es);
-
-  // wrap the textures with useMemo to avoid re-rendering
+  // Configure bump map wrapping
   useMemo(() => {
     bump.wrapS = bump.wrapT = THREE.RepeatWrapping;
-    bump.repeat.setScalar(4);
+    bump.repeat.setScalar(SCENE.TEXTURE_REPEAT);
   }, [bump]);
 
   useMemo(() => {
     normal.wrapS = normal.wrapT = THREE.RepeatWrapping;
-    normal.repeat.setScalar(4);
+    normal.repeat.setScalar(SCENE.TEXTURE_REPEAT);
   }, [normal]);
 
   return (
@@ -95,11 +81,11 @@ const EarthView = ({ view }) => {
           color={"#caf0f8"}
         />
         <OrbitControls
-          enableRotate={mobile ? false : true} // to prevent the user from rotating the earth on mobile for the scrolling
+          enableRotate={!isMobile}
           enableZoom={false}
-          rotateSpeed={0.2}
+          rotateSpeed={SCENE.ORBIT_ROTATE_SPEED}
           autoRotate
-          autoRotateSpeed={0.2}
+          autoRotateSpeed={SCENE.ORBIT_AUTO_ROTATE_SPEED}
           maxPolarAngle={Math.PI / 2} // to prevent the user from rotating the earth upside down
           minPolarAngle={Math.PI / 2}
           enablePan={false}
@@ -109,12 +95,12 @@ const EarthView = ({ view }) => {
         {/* show the loader when the textures are loading */}
         <PLanetLoader isLoading={isLoading} />
         <mesh
-          scale={scalingFactor * 2.5}
-          position={[0, scalingFactor * -0.5, 0]}
+          scale={scalingFactor * PLANET_SCALE.EARTH}
+          position={[0, scalingFactor * PLANET_OFFSET_Y.EARTH, 0]}
           ref={earthMesh}
           rotation={[0, -1, 0]}
         >
-          <sphereGeometry args={[1, 32, 32]} />
+          <sphereGeometry args={SPHERE_GEOMETRY.DETAIL} />
           <meshStandardMaterial
             map={texture} // the texture is used to give the earth its color
             metalness={0}
@@ -130,7 +116,6 @@ const EarthView = ({ view }) => {
           cloudMesh={cloudMesh}
           map={cloud}
           scalingFactor={scalingFactor}
-          mobile={mobile}
         />
       </View>
     </>
@@ -141,17 +126,17 @@ export default EarthView;
 
 export const Cloud = ({ cloudMesh, map, scalingFactor }) => {
   useFrame(() => {
-    cloudMesh.current.rotation.y += -0.0002; // I want the clouds move to different direction but if you want to move it to the same direction as the earth, you can change the sign to positive
+    cloudMesh.current.rotation.y += CLOUD_ROTATION_SPEED;
   });
 
   return (
     <>
       <mesh
-        scale={scalingFactor * 2.52}
-        position={[0, scalingFactor * -0.5, 0]}
+        scale={scalingFactor * PLANET_SCALE.EARTH_CLOUD}
+        position={[0, scalingFactor * PLANET_OFFSET_Y.EARTH, 0]}
         ref={cloudMesh}
       >
-        <sphereGeometry args={[1, 32, 32]} />
+        <sphereGeometry args={SPHERE_GEOMETRY.DETAIL} />
         {/* https://threejs.org/docs/?q=mesh#api/en/materials/MeshPhongMaterial */}
         <meshPhongMaterial map={map} transparent={true} />
       </mesh>

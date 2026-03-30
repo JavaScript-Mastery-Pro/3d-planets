@@ -3,30 +3,30 @@ import { useNavigate } from "react-router-dom";
 import { Canvas } from "@react-three/fiber";
 
 // Internal imports
-import { fictionalPlanetCardLists } from "../constants";
-import { arrowImg } from "../utils";
-import SmallPlanetsViewer from "../PlanetsComponents/SmallPlanetsViewer";
+import { fictionalPlanetCardLists, arrowImg } from "@c";
+import SmallPlanetsViewer from "@/components/models/SmallPlanetsViewer";
 
 const CardsContainer = ({ restrict }) => {
-  const nav = useNavigate();
+  const navigate = useNavigate();
 
-  const handleClick = (id) => {
-    nav(`/planets/${id}`);
+  const handleCardClick = (id) => {
+    navigate(`/planets/${id}`);
   };
 
-  const [array, setArray] = useState([]);
+  const [cardList, setCardList] = useState([]);
 
+  // Filter card list based on restrict prop
   useEffect(() => {
     if (restrict) {
-      setArray(fictionalPlanetCardLists.slice(0, 3));
+      setCardList(fictionalPlanetCardLists.slice(0, 3));
     } else {
-      setArray(fictionalPlanetCardLists);
+      setCardList(fictionalPlanetCardLists);
     }
   }, []);
 
   return (
     <div className="flex-center gap-0 md:gap-14 flex-wrap mt-28">
-      {array.map((list) => (
+      {cardList.map((list) => (
         <div className={`w-96 h-96`} key={list.id}>
           <div className="relative h-full bg-rectangle-card-bg bg-no-repeat bg-center bg-contain">
             <div className="w-60 h-60 absolute z-50 -top-14 -left-14">
@@ -38,7 +38,7 @@ const CardsContainer = ({ restrict }) => {
               src={arrowImg}
               alt="arrow"
               className="arrow"
-              onClick={() => handleClick(list.id)}
+              onClick={() => handleCardClick(list.id)}
             />
 
             {/* info texts */}

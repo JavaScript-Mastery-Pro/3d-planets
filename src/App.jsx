@@ -1,12 +1,12 @@
 import React from "react";
 
 import { Route, Routes } from "react-router-dom";
-import ReactLenis from "@studio-freight/react-lenis";
+import ReactLenis from "lenis/react";
 
-import Home from "./sections/Home";
-import PlanetLists from "./routes/PlanetLists";
-import PlanetDetail from "./routes/PlanetDetail";
-import ScrollToTop from "./components/ScrollToTop";
+import Home from "@/components/sections/Home";
+import PlanetLists from "@/components/sections/PlanetLists";
+import PlanetDetail from "@/components/sections/PlanetDetail";
+import ScrollToTop from "@/components/sections/ScrollToTop";
 
 const App = () => {
   return (

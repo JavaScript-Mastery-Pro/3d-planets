@@ -1,14 +1,17 @@
 import { OrbitControls, Sparkles } from "@react-three/drei";
 import React from "react";
 
+// Internal imports
+import { SCENE } from "@c";
+
 const CommonViewer = ({ sparkle, rectAreaLight }) => {
   return (
     <>
       <OrbitControls
         enableZoom={false}
-        rotateSpeed={0.2}
+        rotateSpeed={SCENE.ORBIT_ROTATE_SPEED}
         autoRotate
-        autoRotateSpeed={0.2}
+        autoRotateSpeed={SCENE.ORBIT_AUTO_ROTATE_SPEED}
         maxPolarAngle={Math.PI / 2}
         minPolarAngle={Math.PI / 2}
         enablePan={false}

@@ -2,23 +2,13 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 // Import internals
-import { backImg } from "../utils";
+import { backImg, NAV_LINKS } from "@c";
 
 const Nav = ({ border, isBack }) => {
-  const home = useNavigate();
-  const planet = useNavigate();
-  const back = useNavigate();
-
-  const handleHome = () => {
-    home("/");
-  };
-
-  const handlePlanet = () => {
-    planet("/planets");
-  };
+  const navigate = useNavigate();
 
   const handleBack = () => {
-    back("/planets");
+    navigate("/planets");
   };
 
   return (
@@ -44,22 +34,17 @@ const Nav = ({ border, isBack }) => {
       )}
 
       <div className="flex gap-10">
-        <p
-          className={`nav-text ${
-            isBack ? "nav-hover-text-isBack" : "nav-hover-text-notBack"
-          }`}
-          onClick={handleHome}
-        >
-          Home
-        </p>
-        <p
-          className={`nav-text ${
-            isBack ? "nav-hover-text-isBack" : "nav-hover-text-notBack"
-          }`}
-          onClick={handlePlanet}
-        >
-          Planets
-        </p>
+        {NAV_LINKS.map((link) => (
+          <p
+            key={link.path}
+            className={`nav-text ${
+              isBack ? "nav-hover-text-isBack" : "nav-hover-text-notBack"
+            }`}
+            onClick={() => navigate(link.path)}
+          >
+            {link.label}
+          </p>
+        ))}
       </div>
     </nav>
   );
